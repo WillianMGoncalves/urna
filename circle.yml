@@ -6,6 +6,7 @@ deployment:
   production:
     branch: prod
     test:
-      - grunt deploy
+      pre:
+        - grunt deploy
     heroku:
       appname: urna
