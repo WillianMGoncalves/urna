@@ -3,6 +3,7 @@ module.exports = function(grunt){
     var configuracoes = require('./servidor/configuracoes/configuracoes');
     var async = require('async');
 
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         shell: {
