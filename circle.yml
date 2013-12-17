@@ -4,6 +4,7 @@ deployment:
     heroku:
       appname: urna
   production:
+    commands: grunt deploy
     branch: prod
     heroku:
       appname: urna
