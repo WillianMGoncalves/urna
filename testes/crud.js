@@ -9,7 +9,7 @@ describe('Crud', function(){
                 assert.ok('Ok')
             };
             var funcaoSucesso = function( resposta ){
-                assert.ok(false,'Não foi fornecido um endereco válido');
+                assert.notOk('Não foi fornecido um endereco válido');
             }
             assert.doesNotThrow(function(){
                 crud.obterTudo( null,funcaoSucesso,funcaoFalha );
