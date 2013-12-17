@@ -2,7 +2,7 @@ var crud = require('../modelos/crud');
 var utils = require('./utils');
 
 module.exports = function(socket, global){
-    "use strict"
+    "use strict";
     return {
 
         atualizar: function (administrador){
@@ -35,7 +35,7 @@ module.exports = function(socket, global){
                 console.log(mensagemErro);
             };
 
-            var administradores = crud.obterTudo('administradores', sucessoObtencao, falhaObtencao);
+            crud.obterTudo('administradores', sucessoObtencao, falhaObtencao);
         },
 
         obterPorId: function( id ){
@@ -93,7 +93,7 @@ module.exports = function(socket, global){
             var sucessoExclucao = function(administradores){
 
                 console.log('Administrador excluido com Sucesso!');
-                socket.emit( 'administradores-obter-tudo', administradores );
+                socket.emit('administradores-obter-tudo', administradores);
             };
 
             var falhaExclusao = function( mensagemErro ){

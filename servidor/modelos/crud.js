@@ -2,8 +2,6 @@ var fs = require("fs");
 
 var obterTudo = function( enderecoArquivo, funcaoSucesso, funcaoFalha ){
 
-    var baseDados = require("../baseDados/login.json");
-
     if( typeof funcaoSucesso != "function" ){
         throw "É necessário passar uma função de sucesso como parâmetro";
     }
@@ -147,20 +145,3 @@ module.exports = {
     excluir: excluir
 
 };
-
-
-function ff(ob, callback){
-    if(!err)
-    return callback(true);
-    else
-    return callback(false)
-
-}
-
-var funcao = function(dados){
-    console.log(dadas)
-    return teste;
-};
-
-x = ff(novo, funcao);
-gg(novo, funcao);

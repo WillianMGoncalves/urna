@@ -16,7 +16,7 @@ module.exports = function( socket, global ){
             var falhaObtencao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na obtenção de todos secao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.obterTudo( 'secao', sucessoObtencao, falhaObtencao );
@@ -33,7 +33,7 @@ module.exports = function( socket, global ){
             var falhaAlteracao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na alteração de secao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.atualizar( 'secao', secao, sucessoAlteracao, falhaAlteracao );
