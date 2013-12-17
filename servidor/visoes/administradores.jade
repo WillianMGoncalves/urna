@@ -1,0 +1,54 @@
+.panel.panel-default
+    .panel-heading
+        .navbar
+            .navbar-inner
+                .container
+                    .brand Administradores
+                    button(type="button")#adicionar-administrador.btn.btn-default Inserir
+    table.visualizadores
+        thead
+            th
+                | Nome
+            th
+                | CPF
+            th
+                | Funções
+        tbody#lista-administradores.table
+
+
+script#template-lista-administradores(type='text/html').
+    <tr>
+        <td id="nome-administrador-${id}">${nome}</td>
+        <td id="cpf-administrador-${id}">${cpf}</td>
+        <td>
+            <button type="button" id="excluir-administrador-${id}" class="btn btn-default excluir-administrador">Excluir</button>
+            <button type="button" id="editar-administrador-${id}" class="btn btn-default editar-administrador">Editar</button>
+        </td>
+    </tr>
+
+#edicao-administrador
+script#template-edicao-administrador(type='text/html').
+    <div id="modal-edicao-administrador" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">${titulo}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label>Nome:</label>
+                        <input type="text" class="nome-administrador" value="${nome}"/>
+                    </p>
+                    <p>
+                        <label>CPF:</label>
+                        <input type="text" class="cpf-administrador" value="${cpf}"/>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>

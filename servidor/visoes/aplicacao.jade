@@ -1,0 +1,30 @@
+#barra-navegacao.tabbable
+    ul.nav.nav-tabs
+        li.active
+            a(href="#visualizacao_administradores",data-toggle="tab") Administradores
+        li
+            a(href="#visualizacao_eleitores",data-toggle="tab") Eleitores
+        li
+            a(href="#visualizacao_candidatos",data-toggle="tab") Candidatos
+        li
+            a(href="#visualizacao_partidos",data-toggle="tab") Partidos
+        li
+            a(href="#visualizacao_coligacoes",data-toggle="tab") Coligações
+        li
+            a(href="#visualizacao_secao",data-toggle="tab") Seção
+    button(type="button")#iniciar-eleicao.btn.btn-default Iniciar Eleicao
+    button(type="button")#realizar-logout.btn.btn-default Logout
+
+#containers.tab-content
+    #visualizacao_administradores.tab-pane.active
+        include administradores
+    #visualizacao_eleitores.tab-pane
+        include eleitores
+    #visualizacao_candidatos.tab-pane
+        include candidatos
+    #visualizacao_partidos.tab-pane
+        include partidos
+    #visualizacao_coligacoes.tab-pane
+        include coligacoes
+    #visualizacao_secao.tab-pane
+        include secao

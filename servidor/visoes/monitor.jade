@@ -1,0 +1,45 @@
+.panel.panel-default
+    .panel-heading
+        .navbar
+            .navbar-inner
+                .container
+                    .brand Monitor
+                    //- button(type="button")#adicionar-partido.btn.btn-default Inserir
+    .visualizadores
+        ul.thumbnails
+            #lista-urnas
+
+.container
+    #selecao-eleitor-urna
+
+script#template-lista-urnas(type='text/html').
+    <li class="span4">
+        <h2>Urna ${index}</h2>
+        <strong>IP:</strong>${ip}
+        <strong>Porta:</strong>${porta}
+        <h3>Sem Eleitor</h3>
+        <button type="button" id="#inserir-eleitor-urna-${id}" class="btn btn-default inserir-eleitor-urna">Novo Eleitor</button>
+    </li>
+
+script#template-selecao-eleitor-urna(type='text/html').
+    <div id="modal-selecao-eleitor-urna" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close fechar_modais" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">${titulo}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label>Titulo:</label>
+                        <input type="text" class="titulo-eleitor-urna"/>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default fechar_modais" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary pesquisa-eleitor-urna" id="pesquisa-eleitor-urna-${urna}">Pesquisar</button>
+                    <button type="button" class="btn btn-primary selecao-eleitor-urna" id="selecao-eleitor-urna-${urna}">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>

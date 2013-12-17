@@ -1,0 +1,34 @@
+//- Funções de Importação
+mixin importJs( endereco )
+    script(type="text/javascript").
+        !{fs.readFileSync("cliente/" + endereco + ".js").toString()}
+mixin importCss( endereco )
+    style(type="text/css",rel="stylesheet") !{fs.readFileSync("cliente/" + endereco + ".css").toString()}
+//- Início da Pagina
+doctype 5
+html(lang="pt-br")
+    head
+        meta(charset='utf-8')
+        title= titulo
+        //- Inclusão de todas as folhas de estilo concatenadas e compactadas
+        +importCss("min/styles_aplicacao.min")
+
+        //- Inclusão de scripts que não aceitam compressão
+        +importJs("min/scripts_aplicacao.min")
+
+    body
+        #app
+            .navbar
+                .navbar-inner
+                    .container
+                        .brand= titulo
+            form#formulario-autenticacao.ng-valid
+                .container
+                    .row
+                        .span1 Login
+                        input(type="text")#formulario-autenticacao-login.span3.input-block-level.ng-valid
+                    .row
+                        .span1 Senha
+                        input(type="password")#formulario-autenticacao-senha.span3.input-block-level.ng-valid
+                    .row
+                        input(type="submit",value="Enviar").span2.btn

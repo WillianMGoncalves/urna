@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "styles_aplicacao.min.css",
+  "sources": [
+    "cliente/plugins/bootstrap/css/bootstrap.min.css",
+    "cliente/plugins/bootstrap/css/bootstrap-responsive.min.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;A;ACRA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;A"
+}

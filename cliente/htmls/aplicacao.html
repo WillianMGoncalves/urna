@@ -1,0 +1,207 @@
+<div id="barra-navegacao" class="tabbable"><ul class="nav nav-tabs"><li class="active"><a href="#visualizacao_administradores" data-toggle="tab">Administradores</a></li><li><a href="#visualizacao_eleitores" data-toggle="tab">Eleitores</a></li><li><a href="#visualizacao_candidatos" data-toggle="tab">Candidatos</a></li><li><a href="#visualizacao_partidos" data-toggle="tab">Partidos</a></li><li><a href="#visualizacao_coligacoes" data-toggle="tab">Coligações</a></li><li><a href="#visualizacao_secao" data-toggle="tab">Seção</a></li></ul><button type="button" id="iniciar-eleicao" class="btn btn-default">Iniciar Eleicao</button><button type="button" id="realizar-logout" class="btn btn-default">Logout</button></div><div id="containers" class="tab-content"><div id="visualizacao_administradores" class="tab-pane active"><div class="panel panel-default"><div class="panel-heading"><div class="navbar"><div class="navbar-inner"><div class="container"><div class="brand">Administradores</div><button type="button" id="adicionar-administrador" class="btn btn-default">Inserir</button></div></div></div></div><table class="visualizadores"><thead><th>Nome</th><th>CPF</th><th>Funções</th></thead><tbody id="lista-administradores" class="table"></tbody></table></div><script id="template-lista-administradores" type="text/html"><tr>
+    <td id="nome-administrador-${id}">${nome}</td>
+    <td id="cpf-administrador-${id}">${cpf}</td>
+    <td>
+        <button type="button" id="excluir-administrador-${id}" class="btn btn-default excluir-administrador">Excluir</button>
+        <button type="button" id="editar-administrador-${id}" class="btn btn-default editar-administrador">Editar</button>
+    </td>
+</tr>
+</script><div id="edicao-administrador"></div><script id="template-edicao-administrador" type="text/html"><div id="modal-edicao-administrador" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">${titulo}</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <label>Nome:</label>
+                    <input type="text" class="nome-administrador" value="${nome}"/>
+                </p>
+                <p>
+                    <label>CPF:</label>
+                    <input type="text" class="cpf-administrador" value="${cpf}"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div></script></div><div id="visualizacao_eleitores" class="tab-pane"><div class="panel panel-default"><div class="panel-heading"><div class="navbar"><div class="navbar-inner"><div class="container"><div class="brand">Eleitores</div><button type="button" id="adicionar-eleitor" class="btn btn-default">Inserir</button></div></div></div></div><table class="visualizadores"><thead><th>Nome</th><th>CPF</th><th>Titulo</th><th>Funções</th></thead><tbody id="lista-eleitores" class="table"></tbody></table></div><script id="template-lista-eleitores" type="text/html"><tr>
+    <td id="nome-eleitor-${id}">${nome}</td>
+    <td id="cpf-eleitor-${id}">${cpf}</td>
+    <td>
+        <button type="button" id="excluir-eleitor-${id}" class="btn btn-default excluir-eleitor">Excluir</button>
+        <button type="button" id="editar-eleitor-${id}" class="btn btn-default editar-eleitor">Editar</button>
+    </td>
+</tr>
+</script><div id="edicao-eleitor"></div><script id="template-edicao-eleitor" type="text/html"><div id="modal-edicao-eleitor" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">${titulo}</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <label>Nome:</label>
+                    <input type="text" class="nome-eleitor" value="${nome}"/>
+                </p>
+                <p>
+                    <label>CPF:</label>
+                    <input type="text" class="cpf-eleitor" value="${cpf}"/>
+                </p>
+                <p>
+                    <label>Titulo:</label>
+                    <input type="text" class="titulo-eleitor" value="${cpf}"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div></script></div><div id="visualizacao_candidatos" class="tab-pane"><div class="panel panel-default"><div class="panel-heading"><div class="navbar"><div class="navbar-inner"><div class="container"><div class="brand">Candidatos</div><button type="button" id="adicionar-candidato" class="btn btn-default">Inserir</button></div></div></div></div><table class="visualizadores"><thead><th>Nome</th><th>CPF</th><th>Numero</th><th>Partido</th><th>Funções</th></thead><tbody id="lista-candidatos" class="table"></tbody></table></div><script id="template-lista-candidatos" type="text/html"><tr>
+    <td id="nome-candidato-${id}">${nome}</td>
+    <td id="cpf-candidato-${id}">${cpf}</td>
+    <td>
+        <button type="button" id="excluir-candidato-${id}" class="btn btn-default excluir-candidato">Excluir</button>
+        <button type="button" id="editar-candidato-${id}" class="btn btn-default editar-candidato">Editar</button>
+    </td>
+</tr>
+</script><div id="edicao-candidato"></div><script id="template-edicao-candidato" type="text/html"><div id="modal-edicao-candidato" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">${titulo}</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <label>Nome:</label>
+                    <input type="text" class="nome-candidato" value="${nome}"/>
+                </p>
+                <p>
+                    <label>CPF:</label>
+                    <input type="text" class="cpf-candidato" value="${cpf}"/>
+                </p>
+                <p>
+                    <label>Numero:</label>
+                    <input type="text" class="numero-candidato" value="${cpf}"/>
+                </p>
+                <p>
+                    <label>CPF:</label>
+                    <input type="text" class="partido-candidato" value="${cpf}"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div></script></div><div id="visualizacao_partidos" class="tab-pane"><div class="panel panel-default"><div class="panel-heading"><div class="navbar"><div class="navbar-inner"><div class="container"><div class="brand">Partidos</div><button type="button" id="adicionar-partido" class="btn btn-default">Inserir</button></div></div></div></div><table class="visualizadores"><thead><th>Nome</th><th>CPF</th><th>Funções</th></thead><tbody id="lista-partidos" class="table"></tbody></table></div><script id="template-lista-partidos" type="text/html"><tr>
+    <td id="nome-partido-${id}">${nome}</td>
+    <td id="cpf-partido-${id}">${cpf}</td>
+    <td>
+        <button type="button" id="excluir-partido-${id}" class="btn btn-default excluir-partido">Excluir</button>
+        <button type="button" id="editar-partido-${id}" class="btn btn-default editar-partido">Editar</button>
+    </td>
+</tr>
+</script><div id="edicao-partido"></div><script id="template-edicao-partido" type="text/html"><div id="modal-edicao-partido" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">${titulo}</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <label>Nome:</label>
+                    <input type="text" class="nome-partido" value="${nome}"/>
+                </p>
+                <p>
+                    <label>CPF:</label>
+                    <input type="text" class="cpf-partido" value="${cpf}"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div></script></div><div id="visualizacao_coligacoes" class="tab-pane"><div class="panel panel-default"><div class="panel-heading"><div class="navbar"><div class="navbar-inner"><div class="container"><div class="brand">Coligacoes</div><button type="button" id="adicionar-coligacao" class="btn btn-default">Inserir</button></div></div></div></div><table class="visualizadores"><thead><th>Nome</th><th>CPF</th><th>Funções</th></thead><tbody id="lista-coligacoes" class="table"></tbody></table></div><script id="template-lista-coligacoes" type="text/html"><tr>
+    <td id="nome-coligacao-${id}">${nome}</td>
+    <td id="cpf-coligacao-${id}">${cpf}</td>
+    <td>
+        <button type="button" id="excluir-coligacao-${id}" class="btn btn-default excluir-coligacao">Excluir</button>
+        <button type="button" id="editar-coligacao-${id}" class="btn btn-default editar-coligacao">Editar</button>
+    </td>
+</tr>
+</script><div id="edicao-coligacao"></div><script id="template-edicao-coligacao" type="text/html"><div id="modal-edicao-coligacao" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">${titulo}</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <label>Nome:</label>
+                    <input type="text" class="nome-coligacao" value="${nome}"/>
+                </p>
+                <p>
+                    <label>CPF:</label>
+                    <input type="text" class="cpf-coligacao" value="${cpf}"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div></script></div><div id="visualizacao_secao" class="tab-pane"><div class="panel panel-default"><div class="panel-heading"><div class="navbar"><div class="navbar-inner"><div class="container"><div class="brand">Seção</div><button type="button" id="editar-secao" class="btn btn-default">Editar</button></div></div></div></div><div class="visualizadores"><div id="dados-secao"></div></div></div><script id="template-dados-secao" type="text/html"><div>
+    <h3>Nome:</h3>
+    ${nome}
+</div>
+<div>
+    <h3>Zona:</h3>
+    ${zona}
+</div>
+<div>
+    <h3>Município:</h3>
+    ${municipio}
+</div>
+</script><div id="edicao-secao"></div><script id="template-edicao-secao" type="text/html"><div id="modal-edicao-secao" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edição da Seção</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <label>Nome:</label>
+                    <input type="text" class="nome-secao" value="${nome}"/>
+                </p>
+                <p>
+                    <label>Zona:</label>
+                    <input type="text" class="zona-secao" value="${zona}"/>
+                </p>
+                <p>
+                    <label>Município:</label>
+                    <input type="text" class="municipio-secao" value="${municipio}"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="alterar-secao">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div></script></div></div>

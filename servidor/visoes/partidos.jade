@@ -1,0 +1,53 @@
+.panel.panel-default
+    .panel-heading
+        .navbar
+            .navbar-inner
+                .container
+                    .brand Partidos
+                    button(type="button")#adicionar-partido.btn.btn-default Inserir
+    table.visualizadores
+        thead
+            th
+                | Nome
+            th
+                | CPF
+            th
+                | Funções
+        tbody#lista-partidos.table
+
+script#template-lista-partidos(type='text/html').
+    <tr>
+        <td id="nome-partido-${id}">${nome}</td>
+        <td id="cpf-partido-${id}">${cpf}</td>
+        <td>
+            <button type="button" id="excluir-partido-${id}" class="btn btn-default excluir-partido">Excluir</button>
+            <button type="button" id="editar-partido-${id}" class="btn btn-default editar-partido">Editar</button>
+        </td>
+    </tr>
+
+#edicao-partido
+script#template-edicao-partido(type='text/html').
+    <div id="modal-edicao-partido" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">${titulo}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label>Nome:</label>
+                        <input type="text" class="nome-partido" value="${nome}"/>
+                    </p>
+                    <p>
+                        <label>CPF:</label>
+                        <input type="text" class="cpf-partido" value="${cpf}"/>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>

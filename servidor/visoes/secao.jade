@@ -1,0 +1,54 @@
+.panel.panel-default
+    .panel-heading
+        .navbar
+            .navbar-inner
+                .container
+                    .brand Seção
+                    button(type="button")#adicionar-coligacao.btn.btn-default#editar-secao Editar
+    .visualizadores
+        #dados-secao
+
+script#template-dados-secao(type='text/html').
+    <div>
+        <h3>Nome:</h3>
+        ${nome}
+    </div>
+    <div>
+        <h3>Zona:</h3>
+        ${zona}
+    </div>
+    <div>
+        <h3>Município:</h3>
+        ${municipio}
+    </div>
+
+#edicao-secao
+script#template-edicao-secao(type='text/html').
+    <div id="modal-edicao-secao" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Edição da Seção</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label>Nome:</label>
+                        <input type="text" class="nome-secao" value="${nome}"/>
+                    </p>
+                    <p>
+                        <label>Zona:</label>
+                        <input type="text" class="zona-secao" value="${zona}"/>
+                    </p>
+                    <p>
+                        <label>Município:</label>
+                        <input type="text" class="municipio-secao" value="${municipio}"/>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="alterar-secao">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>

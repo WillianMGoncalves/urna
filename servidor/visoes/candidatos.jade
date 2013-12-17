@@ -1,0 +1,65 @@
+.panel.panel-default
+    .panel-heading
+        .navbar
+            .navbar-inner
+                .container
+                    .brand Candidatos
+                    button(type="button")#adicionar-candidato.btn.btn-default Inserir
+    table.visualizadores
+        thead
+            th
+                | Nome
+            th
+                | CPF
+            th
+                | Numero
+            th
+                | Partido
+            th
+                | Funções
+        tbody#lista-candidatos.table
+
+script#template-lista-candidatos(type='text/html').
+    <tr>
+        <td id="nome-candidato-${id}">${nome}</td>
+        <td id="cpf-candidato-${id}">${cpf}</td>
+        <td>
+            <button type="button" id="excluir-candidato-${id}" class="btn btn-default excluir-candidato">Excluir</button>
+            <button type="button" id="editar-candidato-${id}" class="btn btn-default editar-candidato">Editar</button>
+        </td>
+    </tr>
+
+#edicao-candidato
+script#template-edicao-candidato(type='text/html').
+    <div id="modal-edicao-candidato" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">${titulo}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label>Nome:</label>
+                        <input type="text" class="nome-candidato" value="${nome}"/>
+                    </p>
+                    <p>
+                        <label>CPF:</label>
+                        <input type="text" class="cpf-candidato" value="${cpf}"/>
+                    </p>
+                    <p>
+                        <label>Numero:</label>
+                        <input type="text" class="numero-candidato" value="${cpf}"/>
+                    </p>
+                    <p>
+                        <label>CPF:</label>
+                        <input type="text" class="partido-candidato" value="${cpf}"/>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary ${acao}" id="${ id == "" ? acao : acao + "-" + id }">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
