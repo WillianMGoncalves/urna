@@ -11,9 +11,8 @@ describe('Crud', function(){
             var funcaoSucesso = function( resposta ){
                 assert.notOk('Não foi fornecido um endereco válido');
             }
-            assert.doesNotThrow(function(){
-                crud.obterTudo( null,funcaoSucesso,funcaoFalha );
-            })
+
+            crud.obterTudo( null,funcaoSucesso,funcaoFalha );
         })
     })
 })

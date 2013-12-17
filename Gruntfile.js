@@ -128,7 +128,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-mocha-test');
 
-    grunt.registerTask('deploy', ['concat:css','cssmin:css','concat:js','uglify:js','jade:compile','mochaTest:mochaTest']);
+    grunt.registerTask('deploy', ['mochaTest:mochaTest','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
     grunt.registerTask('pages', ['jade:compile']);
 
     grunt.registerTask('default',[]);
