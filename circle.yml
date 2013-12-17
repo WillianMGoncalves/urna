@@ -1,0 +1,9 @@
+deployment:
+  development:
+    branch: dev
+    heroku:
+      appname: urna
+  production:
+    branch: prod
+    heroku:
+      appname: urna
