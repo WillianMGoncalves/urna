@@ -38,5 +38,5 @@ module.exports = function( socket, global ){
 
             crud.atualizar( 'secao', secao, sucessoAlteracao, falhaAlteracao );
         }
-    }
+    };
 };

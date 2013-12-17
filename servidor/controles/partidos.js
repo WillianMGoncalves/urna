@@ -35,7 +35,7 @@ module.exports = function( socket, global ){
                 console.log( mensagemErro );
             };
 
-            var partidos = crud.obterTudo( 'partidos', sucessoObtencao, falhaObtencao );
+            crud.obterTudo( 'partidos', sucessoObtencao, falhaObtencao );
         },
 
         obterPorId: function( id ){

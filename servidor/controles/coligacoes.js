@@ -15,7 +15,7 @@ module.exports = function( socket, global ){
             var falhaAtualizacao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na atualizacao de coligacao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.atualizar( 'coligacoes', coligacao, sucessoAtualizacao, falhaAtualizacao );
@@ -32,10 +32,10 @@ module.exports = function( socket, global ){
             var falhaObtencao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na obtenção de todos coligacao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
-            var coligacoes = crud.obterTudo( 'coligacoes', sucessoObtencao, falhaObtencao );
+            coligacoes = crud.obterTudo( 'coligacoes', sucessoObtencao, falhaObtencao );
         },
 
         obterPorId: function( id ){
@@ -48,7 +48,7 @@ module.exports = function( socket, global ){
             var falhaObtencaoPorId = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na otenção de coligacao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.obterId( 'coligacoes', id, sucessoObtencaoPorId, falhaObtencaoPorId );
@@ -65,7 +65,7 @@ module.exports = function( socket, global ){
             var falhaInsercao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na inserção de coligacao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.inserir( 'coligacoes', coligacao, sucessoInsercao, falhaInsercao );
@@ -82,7 +82,7 @@ module.exports = function( socket, global ){
             var falhaAlteracao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na alteração de coligacao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.alterar( 'coligacoes', coligacao.id, coligacao, sucessoAlteracao, falhaAlteracao );
@@ -99,7 +99,7 @@ module.exports = function( socket, global ){
             var falhaExclusao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na exclusão de coligacao! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.excluir( 'coligacoes', coligacao, sucessoExclucao, falhaExclusao );

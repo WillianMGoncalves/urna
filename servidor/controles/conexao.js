@@ -1,5 +1,5 @@
 module.exports = function(socket){
-    "use strict"
+    "use strict";
     // Variáveis e bibliotecas
 
     var configuracoes = require('../configuracoes/configuracoes');
@@ -142,7 +142,7 @@ module.exports = function(socket){
                         enviarCliente( "disponibilizar-aplicacao", paginaUrna.toString() );
                         socketMesario.emit( "obter-todas-urnas", urnas );
                     }
-                };
+                }
             }
         });
     };
@@ -271,6 +271,7 @@ module.exports = function(socket){
                     break;
                 case "usuario-ja-logado":
                     realizarLogout();
+                    break;
                 default:
                     break;
             }
