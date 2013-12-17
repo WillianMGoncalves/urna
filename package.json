@@ -16,6 +16,7 @@
         "grunt-contrib-concat": "~0.3.*",
         "grunt-contrib-cssmin": "~0.7.*",
         "grunt-contrib-uglify": "~0.2.*",
+        "grunt-mocha-test": "~0.8.*",
         "async": "~0.2.*"
     },
     "engines": {

@@ -106,11 +106,19 @@ module.exports = function(grunt){
                 }
             }
         },
-        watch: {
-            options: {
-                livereload: true
+        mochaTest: {
+            mochaTest: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['testes/**/*.js']
             }
         }
+//        watch: {
+//            options: {
+//                livereload: true
+//            }
+//        }
     });
 
     grunt.loadNpmTasks('grunt-shell');
@@ -118,8 +126,9 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-mocha-test');
 
-    grunt.registerTask('deploy', ['concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
+    grunt.registerTask('deploy', ['concat:css','cssmin:css','concat:js','uglify:js','jade:compile','mochaTest:mochaTest']);
     grunt.registerTask('pages', ['jade:compile']);
 
     grunt.registerTask('default',[]);
