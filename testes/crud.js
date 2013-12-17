@@ -39,7 +39,7 @@ describe('Crud', function(){
         };
         var funcaoSucesso = function( dados ){
             assert.notEqual( dados.indexOf(dados), -1 );
-        }
+        };
         it('Inserir adiciona parametros elementos', function(){
 
             crud.inserir('teste', novosDados, funcaoSucesso, funcaoFalha );

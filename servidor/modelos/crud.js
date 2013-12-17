@@ -25,6 +25,7 @@ var obterTudo = function( enderecoArquivo, funcaoSucesso, funcaoFalha ){
     });
 };
 
+
 var obterPorPropriedade = function( enderecoArquivo, nomePropriedade, valorPropriedade, funcaoSucesso, funcaoFalha ){
 
     var novaFuncaoSucesso = function(baseDados){
@@ -146,3 +147,20 @@ module.exports = {
     excluir: excluir
 
 };
+
+
+function ff(ob, callback){
+    if(!err)
+    return callback(true);
+    else
+    return callback(false)
+
+}
+
+var funcao = function(dados){
+    console.log(dadas)
+    return teste;
+};
+
+x = ff(novo, funcao);
+gg(novo, funcao);
