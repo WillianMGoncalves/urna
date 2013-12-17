@@ -28,7 +28,7 @@ app.get('/',function(req,res){
 });
 
 // Iniciando Socket.io sincronizado com Express
-var servidor = http.createServer(app).listen(app.get('port'),'localhost',
+var servidor = http.createServer(app).listen(app.get('port'),
     function(){
         console.log("Servidor iniciado na porta: " + app.get('port'));
     }
