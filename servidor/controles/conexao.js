@@ -1,5 +1,5 @@
 module.exports = function(socket){
-
+    "use strict"
     // Variáveis e bibliotecas
 
     var configuracoes = require('../configuracoes/configuracoes');
@@ -217,9 +217,8 @@ module.exports = function(socket){
             });
         });
 
-        definicaoEvento( "disconnect", function(){
-
-            for( ponteiroMesario in global.mesarios ){
+        definicaoEvento("disconnect", function(){
+            for(var ponteiroMesario in global.mesarios){
                 console.log(ponteiroMesario)
                 var mesario = global.mesarios[ponteiroMesario];
                 if( mesario.socket == socket.id ){
