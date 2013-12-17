@@ -104,5 +104,5 @@ module.exports = function( socket, global ){
 
             crud.excluir( 'coligacoes', coligacao, sucessoExclucao, falhaExclusao );
         }
-    }
+    };
 };

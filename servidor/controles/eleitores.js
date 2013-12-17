@@ -35,7 +35,7 @@ module.exports = function( socket, global ){
                 console.log( mensagemErro );
             };
 
-            var eleitores = crud.obterTudo( 'eleitores', sucessoObtencao, falhaObtencao );
+            crud.obterTudo( 'eleitores', sucessoObtencao, falhaObtencao );
         },
 
         obterPorId: function( id ){
@@ -104,5 +104,5 @@ module.exports = function( socket, global ){
 
             crud.excluir( 'eleitores', eleitor, sucessoExclucao, falhaExclusao );
         }
-    }
+    };
 };

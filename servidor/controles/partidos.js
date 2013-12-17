@@ -104,5 +104,5 @@ module.exports = function( socket, global ){
 
             crud.excluir( 'partidos', partido, sucessoExclucao, falhaExclusao );
         }
-    }
+    };
 };

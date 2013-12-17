@@ -197,7 +197,7 @@ module.exports = function(socket){
             var falhaObtencaoPorTitulo = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.obterPorPropriedade('eleitores','titulo',titulo,sucessoObtencaoPorTitulo,falhaObtencaoPorTitulo);
@@ -219,7 +219,7 @@ module.exports = function(socket){
 
         definicaoEvento("disconnect", function(){
             for(var ponteiroMesario in global.mesarios){
-                console.log(ponteiroMesario)
+                console.log(ponteiroMesario);
                 var mesario = global.mesarios[ponteiroMesario];
                 if( mesario.socket == socket.id ){
                     delete global.mesarios[ponteiroMesario];
