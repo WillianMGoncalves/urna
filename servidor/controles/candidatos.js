@@ -15,7 +15,7 @@ module.exports = function( socket, global ){
             var falhaAtualizacao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na atualizacao de candidato! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.atualizar( 'candidatos', candidato, sucessoAtualizacao, falhaAtualizacao );
@@ -32,7 +32,7 @@ module.exports = function( socket, global ){
             var falhaObtencao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na obtenção de todos candidato! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             var candidatos = crud.obterTudo( 'candidatos', sucessoObtencao, falhaObtencao );
@@ -48,7 +48,7 @@ module.exports = function( socket, global ){
             var falhaObtencaoPorId = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na otenção de candidato! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.obterId( 'candidatos', id, sucessoObtencaoPorId, falhaObtencaoPorId );
@@ -65,7 +65,7 @@ module.exports = function( socket, global ){
             var falhaInsercao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na inserção de candidato! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.inserir( 'candidatos', candidato, sucessoInsercao, falhaInsercao );
@@ -82,7 +82,7 @@ module.exports = function( socket, global ){
             var falhaAlteracao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na alteração de candidato! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.alterar( 'candidatos', candidato.id, candidato, sucessoAlteracao, falhaAlteracao );
@@ -99,7 +99,7 @@ module.exports = function( socket, global ){
             var falhaExclusao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na exclusão de candidato! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.excluir( 'candidatos', candidato, sucessoExclucao, falhaExclusao );

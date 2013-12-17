@@ -15,7 +15,7 @@ module.exports = function( socket, global ){
             var falhaAtualizacao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na atualizacao de partido! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.atualizar( 'partidos', partido, sucessoAtualizacao, falhaAtualizacao );
@@ -32,7 +32,7 @@ module.exports = function( socket, global ){
             var falhaObtencao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na obtenção de todos partido! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             var partidos = crud.obterTudo( 'partidos', sucessoObtencao, falhaObtencao );
@@ -48,7 +48,7 @@ module.exports = function( socket, global ){
             var falhaObtencaoPorId = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na otenção de partido! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.obterId( 'partidos', id, sucessoObtencaoPorId, falhaObtencaoPorId );
@@ -65,7 +65,7 @@ module.exports = function( socket, global ){
             var falhaInsercao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na inserção de partido! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.inserir( 'partidos', partido, sucessoInsercao, falhaInsercao );
@@ -82,7 +82,7 @@ module.exports = function( socket, global ){
             var falhaAlteracao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na alteração de partido! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.alterar( 'partidos', partido.id, partido, sucessoAlteracao, falhaAlteracao );
@@ -99,7 +99,7 @@ module.exports = function( socket, global ){
             var falhaExclusao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na exclusão de partido! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.excluir( 'partidos', partido, sucessoExclucao, falhaExclusao );

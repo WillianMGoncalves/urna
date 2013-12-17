@@ -2,7 +2,7 @@ var crud = require('../modelos/crud');
 var utils = require('./utils');
 
 module.exports = function(socket, global){
-
+    "use strict"
     return {
 
         atualizar: function (administrador){
@@ -15,7 +15,7 @@ module.exports = function(socket, global){
             var falhaAtualizacao = function(mensagemErro)
             {
                 console.log('Ocorreu uma falha na atualizacao de administrador! Erro:');
-                console.log(mensagemErro)
+                console.log(mensagemErro);
             };
 
             crud.atualizar('administradores', administrador, sucessoAtualizacao,falhaAtualizacao);
@@ -32,7 +32,7 @@ module.exports = function(socket, global){
             var falhaObtencao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na obtenção de todos administrador! Erro:');
-                console.log(mensagemErro)
+                console.log(mensagemErro);
             };
 
             var administradores = crud.obterTudo('administradores', sucessoObtencao, falhaObtencao);
@@ -48,7 +48,7 @@ module.exports = function(socket, global){
             var falhaObtencaoPorId = function(mensagemErro){
 
                 console.log('Ocorreu uma falha na otenção de administrador! Erro:');
-                console.log(mensagemErro)
+                console.log(mensagemErro);
             };
 
             crud.obterId('administradores', id, sucessoObtencaoPorId, falhaObtencaoPorId);
@@ -65,7 +65,7 @@ module.exports = function(socket, global){
             var falhaInsercao = function(mensagemErro){
 
                 console.log('Ocorreu uma falha na inserção de administrador! Erro:');
-                console.log(mensagemErro)
+                console.log(mensagemErro);
             };
 
             crud.inserir( 'administradores', administrador, sucessoInsercao, falhaInsercao );
@@ -82,7 +82,7 @@ module.exports = function(socket, global){
             var falhaAlteracao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na alteração de administrador! Erro:');
-                console.log( mensagemErro )
+                console.log(mensagemErro);
             };
 
             crud.alterar('administradores', administrador.id, administrador, sucessoAlteracao, falhaAlteracao);
@@ -99,7 +99,7 @@ module.exports = function(socket, global){
             var falhaExclusao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na exclusão de administrador! Erro:');
-                console.log( mensagemErro )
+                console.log(mensagemErro);
             };
 
             crud.excluir( 'administradores', administrador, sucessoExclucao, falhaExclusao );

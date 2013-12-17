@@ -15,7 +15,7 @@ module.exports = function( socket, global ){
             var falhaAtualizacao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na atualizacao de eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.atualizar( 'eleitores', eleitor, sucessoAtualizacao, falhaAtualizacao );
@@ -32,7 +32,7 @@ module.exports = function( socket, global ){
             var falhaObtencao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na obtenção de todos eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             var eleitores = crud.obterTudo( 'eleitores', sucessoObtencao, falhaObtencao );
@@ -48,7 +48,7 @@ module.exports = function( socket, global ){
             var falhaObtencaoPorId = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.obterId( 'eleitores', id, sucessoObtencaoPorId, falhaObtencaoPorId );
@@ -65,7 +65,7 @@ module.exports = function( socket, global ){
             var falhaInsercao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na inserção de eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.inserir( 'eleitores', eleitor, sucessoInsercao, falhaInsercao );
@@ -82,7 +82,7 @@ module.exports = function( socket, global ){
             var falhaAlteracao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na alteração de eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.alterar( 'eleitores', eleitor.id, eleitor, sucessoAlteracao, falhaAlteracao );
@@ -99,7 +99,7 @@ module.exports = function( socket, global ){
             var falhaExclusao = function( mensagemErro ){
 
                 console.log('Ocorreu uma falha na exclusão de eleitor! Erro:');
-                console.log( mensagemErro )
+                console.log( mensagemErro );
             };
 
             crud.excluir( 'eleitores', eleitor, sucessoExclucao, falhaExclusao );
