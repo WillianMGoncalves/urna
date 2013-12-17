@@ -4,6 +4,14 @@ var obterTudo = function( enderecoArquivo, funcaoSucesso, funcaoFalha ){
 
     var baseDados = require("../baseDados/login.json");
 
+    if( typeof funcaoSucesso != "function" ){
+        throw "É necessário passar uma função de sucesso como parâmetro";
+    }
+
+    if( typeof funcaoFalha != "function" ){
+        throw "É necessário passar uma função de falha como parâmetro";
+    }
+
     fs.readFile('servidor/baseDados/' + enderecoArquivo + '.json', function ( mensagemErro, baseDadosString ) {
 
         if( mensagemErro ){
