@@ -1,19 +1,19 @@
-"use strict";
 
-var crud = require("../servidor/modelos/crud"),
-    assert = require("assert");
+var crud = this.require("../servidor/modelos/crud"),
+    assert = this.require("assert");
 
-describe('Crud', function () {
+this.describe('Crud', function () {
+    "use strict";
+
     var funcaoFalhaCorreta = function (mensagemErro) {
-        "use strict";
         assert.ok('Mensagem de erro exibida adequadamente: ' + mensagemErro);
     },
     funcaoSucessoIncorreta = function (resposta) {
         throw 'Erro';
     };
 
-    describe('obterTudo', function () {
-        it('Obter tudo permite endereços errados', function () {
+    this.describe('obterTudo', function () {
+        this.it('Obter tudo permite endereços errados', function () {
             crud.obterTudo(null, funcaoSucessoIncorreta, funcaoFalhaCorreta);
         });
         it('Obter tudo permite funcaoSucesso inválida', function () {
