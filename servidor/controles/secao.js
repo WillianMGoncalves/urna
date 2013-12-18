@@ -1,7 +1,7 @@
-var crud = require('../modelos/crud');
-var utils = require('./utils');
+var crud = require('../modelos/crud'),
+    utils = require('./utils');
 
-module.exports = function( socket, global ){
+module.exports = function( socket ){
 
     return {
 

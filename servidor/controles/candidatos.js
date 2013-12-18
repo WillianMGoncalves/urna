@@ -1,7 +1,8 @@
 var crud = this.require('../modelos/crud');
 var utils = this.require('./utils');
 
-module.exports = function (socket, global) {
+module.exports = function (socket) {
+    "use strict";
 
     return {
 
@@ -19,7 +20,7 @@ module.exports = function (socket, global) {
             crud.atualizar('candidatos', candidato, sucessoAtualizacao, falhaAtualizacao);
         },
 
-        obterTudo: function (candidatos) {
+        obterTudo: function () {
 
             var sucessoObtencao = function (candidatos) {
 

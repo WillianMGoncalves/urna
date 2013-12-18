@@ -7,7 +7,7 @@ this.describe('Crud', function () {
 
     var funcaoFalhaCorreta = function (mensagemErro) {
         assert.ok('Mensagem de erro exibida adequadamente: ' + mensagemErro);
-    }, funcaoSucessoIncorreta = function (resposta) {
+    }, funcaoSucessoIncorreta = function () {
         throw 'Erro';
     };
 
@@ -15,7 +15,7 @@ this.describe('Crud', function () {
         this.it('Obter tudo permite endereços errados', function () {
             crud.obterTudo(null, funcaoSucessoIncorreta, funcaoFalhaCorreta);
         });
-        it('Obter tudo permite funcaoSucesso inválida', function () {
+        this.it('Obter tudo permite funcaoSucesso inválida', function () {
             assert.throws(function () {
                 crud.obterTudo('administradores', null, funcaoFalhaCorreta);
             });

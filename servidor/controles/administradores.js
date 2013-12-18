@@ -1,7 +1,7 @@
-var crud = this.require('../modelos/crud');
-var utils = this.require('./utils');
+var crud = this.require('../modelos/crud'),
+    utils = this.require('./utils');
 
-this.module.exports = function (socket, global) {
+this.module.exports = function (socket) {
     "use strict";
     return {
 
@@ -14,10 +14,10 @@ this.module.exports = function (socket, global) {
                 this.console.log(mensagemErro);
             };
 
-            crud.atualizar('administradores', administrador, sucessoAtualizacao,falhaAtualizacao);
+            crud.atualizar('administradores', administrador, sucessoAtualizacao, falhaAtualizacao);
         },
 
-        obterTudo: function (administradores) {
+        obterTudo: function () {
 
             var sucessoObtencao = function (administradores) {
                 this.console.log('Obtenção de todos administradores ocorreu com Sucesso!');

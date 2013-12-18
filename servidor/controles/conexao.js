@@ -1,11 +1,11 @@
-module.exports = function (socket) {
+this.module.exports = function (socket, global) {
     "use strict";
     // Variáveis e bibliotecas
 
-    var configuracoes = require('../configuracoes/configuracoes'),
-        utils = require('./utils'),
-        crud = require('../modelos/crud'),
-        fs = require('fs'),
+    var configuracoes = this.require('../configuracoes/configuracoes'),
+        utils = this.require('./utils'),
+        crud = this.require('../modelos/crud'),
+        fs = this.require('fs'),
 
         // Utilitários
         //------------------------------
@@ -18,7 +18,6 @@ module.exports = function (socket) {
             this.console.log(mensagemErro);
         },
 
-        //TODO
         // Função que returna uma função que será callback de uma solicitação
         // Do socket.io ela executa uma validacao na requisição antes de chamar
         // Outra função em caso de sucesso em caso de falha executa a função
@@ -27,8 +26,8 @@ module.exports = function (socket) {
         visualizarGlobal = function () {
             this.console.log("[GLOBAL]");
             this.console.log("---------------------------------");
-            this.console.log("mesarios:",Object.keys(global.mesarios).length);
-            this.console.log("urnas:",Object.keys(global.urnas).length);
+            this.console.log("mesarios:", Object.keys(global.mesarios).length);
+            this.console.log("urnas:", Object.keys(global.urnas).length);
             this.console.log("---------------------------------");
         },
         definicaoEvento = function (evento, funcaoSucessoRequisicao) {
@@ -36,19 +35,18 @@ module.exports = function (socket) {
             socket.on(evento, function (dados) {
                 this.console.log("[Evento]_( " + evento + " )");
                 this.console.log("---------------------------------");
-                this.console.log("DADO:",dados);
+                this.console.log("DADO:", dados);
                 this.console.log("---------------------------------");
                 visualizarGlobal();
-                utils.validacaoRequisicoes(dados,funcaoSucessoRequisicao,falhaValidacaoUsuario);
+                utils.validacaoRequisicoes(dados, funcaoSucessoRequisicao, falhaValidacaoUsuario);
             });
         },
 
         enviarCliente = function (mensagem, dados) {
 
-            var log = "[Comando]_( " + mensagem + " )\n" +
-            "---------------------------------\n";
+            var log = "[Comando]_( " + mensagem + " )\n---------------------------------\n";
             if (dados) {
-                socket.emit(mensagem,dados);
+                socket.emit(mensagem, dados);
                 log += "DADO:\n" + JSON.stringify(dados) + "\n";
             } else {
                 socket.emit(mensagem);
@@ -70,8 +68,8 @@ module.exports = function (socket) {
         enviarChaveParaUsuario = function () {
 
             var timestamp = new Date().getTime(),
-            id = socket.id,
-            chave = timestamp + "" + id;
+                id = socket.id,
+                chave = timestamp + "" + id;
 
             global.usuariosOnline[id] = {
                 chave: chave,
