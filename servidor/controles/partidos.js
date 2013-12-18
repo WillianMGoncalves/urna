@@ -3,6 +3,7 @@ var crud = this.require('../modelos/crud'),
 
 this.module.exports = function (socket) {
 
+    "use strict";
     return {
 
         atualizar: function (partido) {
@@ -10,9 +11,7 @@ this.module.exports = function (socket) {
             var sucessoAtualizacao = function () {
 
                 this.console.log('Atualizacao do partido realizada com Sucesso!');
-            };
-
-            var falhaAtualizacao = function (mensagemErro) {
+            }, falhaAtualizacao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na atualizacao de partido! Erro:');
                 this.console.log(mensagemErro);
@@ -27,9 +26,7 @@ this.module.exports = function (socket) {
 
                 this.console.log('Obtenção de todos partidos ocorreu com Sucesso!');
                 socket.emit('partidos-obter-tudo', partidos);
-            };
-
-            var falhaObtencao = function (mensagemErro) {
+            }, falhaObtencao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na obtenção de todos partido! Erro:');
                 this.console.log(mensagemErro);
@@ -43,9 +40,7 @@ this.module.exports = function (socket) {
             var sucessoObtencaoPorId = function () {
 
                 this.console.log('Obtenção de todos partidos ocorreu com Sucesso!');
-            };
-
-            var falhaObtencaoPorId = function (mensagemErro) {
+            }, falhaObtencaoPorId = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na otenção de partido! Erro:');
                 this.console.log(mensagemErro);
@@ -60,9 +55,7 @@ this.module.exports = function (socket) {
 
                 this.console.log('Partido inserido com Sucesso!');
                 socket.emit( 'partidos-obter-tudo', partidos );
-            };
-
-            var falhaInsercao = function (mensagemErro) {
+            }, falhaInsercao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na inserção de partido! Erro:');
                 this.console.log(mensagemErro);
@@ -77,9 +70,7 @@ this.module.exports = function (socket) {
 
                 this.console.log('Partido alterado com Sucesso!');
                 socket.emit('partidos-obter-tudo', partidos);
-            };
-
-            var falhaAlteracao = function (mensagemErro) {
+            }, falhaAlteracao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na alteração de partido! Erro:');
                 this.console.log(mensagemErro);
@@ -94,9 +85,7 @@ this.module.exports = function (socket) {
 
                 this.console.log('Partido excluido com Sucesso!');
                 socket.emit('partidos-obter-tudo', partidos);
-            };
-
-            var falhaExclusao = function (mensagemErro) {
+            }, falhaExclusao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na exclusão de partido! Erro:');
                 this.console.log(mensagemErro);

@@ -38,7 +38,7 @@ this.module.exports = function (socket, global) {
                 this.console.log("DADO:", dados);
                 this.console.log("---------------------------------");
                 visualizarGlobal();
-                utils.validacaoRequisicoes(dados, funcaoSucessoRequisicao, falhaValidacaoUsuario);
+                utils.validacaoRequisicoes(dados, funcaoSucessoRequisicao, falhaValidacaoRequisicao);
             });
         },
 
@@ -69,7 +69,7 @@ this.module.exports = function (socket, global) {
 
             var timestamp = new Date().getTime(),
                 id = socket.id,
-                chave = timestamp + "" + id;
+                chave = timestamp.toString().concat( id );
 
             global.usuariosOnline[id] = {
                 chave: chave,
@@ -90,7 +90,7 @@ this.module.exports = function (socket, global) {
                 var usuarioValido;
 
                 baseDados.every(function (elemento) {
-                    if ('login' in elemento && 'senha' in elemento && 'login' in dados && 'senha' in dados) {
+                    if (elemento.hasOwnProperty('login') && elemento.hasOwnProperty('senha') && dados.hasOwnProperty('login') && dados.hasOwnProperty('senha')) {
                         if (elemento.login === dados.login && elemento.senha === dados.senha) {
                             usuarioValido = elemento;
                             return false;
@@ -112,32 +112,34 @@ this.module.exports = function (socket, global) {
 
             fs.readFile('cliente/htmls/urna.html', function (mensagemErro, aplicacao) {
 
-                var paginaUrna = fs.readFileSync("cliente/htmls/urna.html").toString(),
-                urnaAtual = global.urnas[socket.id],
-                mesario = global.mesarios[urnaAtual.mesario],
-                socketMesario = global.usuariosOnline[mesario.socket].socket;
+                fs.readFile("cliente/htmls/urna.html"), function(mensagemErro, paginaUrnaHtml){
+                    var urnaAtual = global.urnas[socket.id],
+                        mesario = global.mesarios[urnaAtual.mesario],
+                        socketMesario = global.usuariosOnline[mesario.socket].socket,
+                        paginaUrna = paginaUrnaHtml.toString();
 
-                if (mensagemErro) {
-                    falhaValidacaoRequisicao();
-                } else {
-                    var urnas = [],
-                    numeroUrnas = 0;
-                    for (var socketIdUrna in global.urnas) {
-                        var socketUrna = global.usuariosOnline[socketIdUrna].socket,
-                        urna = global.urnas[socketIdUrna];
-                        numeroUrnas++;
-                        if(urna.mesario === urnaAtual.mesario)
-                        {
-                            urnas.push({
-                                index: numeroUrnas,
-                                id: socket.id,
-                                ip: socketUrna.handshake.address.address,
-                                porta: socketUrna.handshake.address.port
-                            });
-                        }
-                        if (numeroUrnas === Object.keys(global.urnas).length) {
-                            enviarCliente("disponibilizar-aplicacao", paginaUrna.toString());
-                            socketMesario.emit("obter-todas-urnas", urnas);
+                    if (mensagemErro) {
+                        falhaValidacaoRequisicao();
+                    } else {
+                        var urnas = [],
+                            numeroUrnas = 0;
+                        for (var socketIdUrna in global.urnas) {
+                            var socketUrna = global.usuariosOnline[socketIdUrna].socket,
+                            urna = global.urnas[socketIdUrna];
+                            numeroUrnas++;
+                            if(urna.mesario === urnaAtual.mesario)
+                            {
+                                urnas.push({
+                                    index: numeroUrnas,
+                                    id: socket.id,
+                                    ip: socketUrna.handshake.address.address,
+                                    porta: socketUrna.handshake.address.port
+                                });
+                            }
+                            if (numeroUrnas === Object.keys(global.urnas).length) {
+                                enviarCliente("disponibilizar-aplicacao", paginaUrna.toString());
+                                socketMesario.emit("obter-todas-urnas", urnas);
+                            }
                         }
                     }
                 }

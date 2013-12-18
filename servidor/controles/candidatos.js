@@ -1,7 +1,7 @@
 var crud = this.require('../modelos/crud');
 var utils = this.require('./utils');
 
-module.exports = function (socket) {
+this.module.exports = function (socket) {
     "use strict";
 
     return {

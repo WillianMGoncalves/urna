@@ -1,7 +1,8 @@
 var crud = this.require('../modelos/crud'),
     utils = this.require('./utils');
 
-this.module.exports = function (socket, global) {
+this.module.exports = function (socket) {
+    "use strict";
 
     return {
 
@@ -10,9 +11,7 @@ this.module.exports = function (socket, global) {
             var sucessoAtualizacao = function () {
 
                 this.console.log('Atualizacao do eleitor realizada com Sucesso!');
-            };
-
-            var falhaAtualizacao = function (mensagemErro) {
+            }, falhaAtualizacao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na atualizacao de eleitor! Erro:');
                 this.console.log(mensagemErro);
@@ -27,9 +26,7 @@ this.module.exports = function (socket, global) {
 
                 this.console.log('Obtenção de todos eleitores ocorreu com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
-            };
-
-            var falhaObtencao = function (mensagemErro) {
+            }, falhaObtencao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na obtenção de todos eleitor! Erro:');
                 this.console.log(mensagemErro);
@@ -43,9 +40,7 @@ this.module.exports = function (socket, global) {
             var sucessoObtencaoPorId = function () {
 
                 this.console.log('Obtenção de todos eleitores ocorreu com Sucesso!');
-            };
-
-            var falhaObtencaoPorId = function (mensagemErro) {
+            }, falhaObtencaoPorId = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
                 this.console.log(mensagemErro);
@@ -60,9 +55,7 @@ this.module.exports = function (socket, global) {
 
                 this.console.log('Eleitor inserido com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
-            };
-
-            var falhaInsercao = function (mensagemErro) {
+            }, falhaInsercao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na inserção de eleitor! Erro:');
                 this.console.log(mensagemErro);
@@ -77,9 +70,7 @@ this.module.exports = function (socket, global) {
 
                 this.console.log('Eleitor alterado com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
-            };
-
-            var falhaAlteracao = function (mensagemErro) {
+            }, falhaAlteracao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na alteração de eleitor! Erro:');
                 this.console.log(mensagemErro);
@@ -94,9 +85,7 @@ this.module.exports = function (socket, global) {
 
                 this.console.log('Eleitor excluido com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
-            };
-
-            var falhaExclusao = function (mensagemErro) {
+            }, falhaExclusao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na exclusão de eleitor! Erro:');
                 this.console.log(mensagemErro);

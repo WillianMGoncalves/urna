@@ -1,7 +1,7 @@
 var crud = this.require('../modelos/crud'),
     utils = this.require('./utils');
 
-module.exports = function (socket, global) {
+this.module.exports = function (socket) {
     "use strict";
 
     return {
@@ -20,7 +20,7 @@ module.exports = function (socket, global) {
             crud.atualizar('coligacoes', coligacao, sucessoAtualizacao, falhaAtualizacao);
         },
 
-        obterTudo: function (coligacoes) {
+        obterTudo: function () {
 
             var sucessoObtencao = function (coligacoes) {
 
@@ -32,7 +32,7 @@ module.exports = function (socket, global) {
                 this.console.log(mensagemErro);
             };
 
-            coligacoes = crud.obterTudo('coligacoes', sucessoObtencao, falhaObtencao);
+            crud.obterTudo('coligacoes', sucessoObtencao, falhaObtencao);
         },
 
         obterPorId: function (id) {
@@ -54,7 +54,7 @@ module.exports = function (socket, global) {
             var sucessoInsercao = function (coligacoes) {
 
                 this.console.log('Coligacao inserido com Sucesso!');
-                socket.emit( 'coligacoes-obter-tudo', coligacoes );
+                socket.emit('coligacoes-obter-tudo', coligacoes);
             }, falhaInsercao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na inserção de coligacao! Erro:');

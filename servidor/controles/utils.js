@@ -1,4 +1,4 @@
-var validacaoRequisicoes = function(dadosRequisicao, funcaoSucesso, funcaoFalha ){
+var validacaoRequisicoes = function (dadosRequisicao, funcaoSucesso, funcaoFalha ) {
 
     if (true) {
         funcaoSucesso(dadosRequisicao);
@@ -7,6 +7,6 @@ var validacaoRequisicoes = function(dadosRequisicao, funcaoSucesso, funcaoFalha 
     }
 };
 
-module.exports = {
+this.module.exports = {
     validacaoRequisicoes: validacaoRequisicoes
 };
