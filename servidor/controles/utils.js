@@ -1,15 +1,12 @@
 var validacaoRequisicoes = function(dadosRequisicao, funcaoSucesso, funcaoFalha ){
 
-    if(true){
-
+    if (true) {
         funcaoSucesso(dadosRequisicao);
     } else {
-
         funcaoFalha("Requisicao Inválida");
     }
 };
 
 module.exports = {
-
     validacaoRequisicoes: validacaoRequisicoes
 };

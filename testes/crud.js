@@ -1,14 +1,14 @@
-var crud = require("../servidor/modelos/crud");
+"use strict";
 
-var assert = require("assert");
+var crud = require("../servidor/modelos/crud"),
+    assert = require("assert");
 
 describe('Crud', function () {
     var funcaoFalhaCorreta = function (mensagemErro) {
         "use strict";
         assert.ok('Mensagem de erro exibida adequadamente: ' + mensagemErro);
-    };
-
-    var funcaoSucessoIncorreta = function (resposta) {
+    },
+    funcaoSucessoIncorreta = function (resposta) {
         throw 'Erro';
     };
 

@@ -12,10 +12,10 @@ module.exports = function(socket){
 
     // Executa esta função em caso de falha na requisição realizada pelo usuário
 
-    var falhaValidacaoRequisicao = function(mensagemErro){
+    var falhaValidacaoRequisicao = function (mensagemErro) {
 
         socket.emit('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!' );
-        console.log( mensagemErro );
+        console.log(mensagemErro);
     };
 
     //TODO
@@ -24,16 +24,16 @@ module.exports = function(socket){
     // Outra função em caso de sucesso em caso de falha executa a função
     // "falhaValidacaoRequisicao"
 
-    var visualizarGlobal = function(){
+    var visualizarGlobal = function () {
         console.log("[GLOBAL]");
         console.log("---------------------------------");
         console.log("mesarios:",Object.keys(global.mesarios).length);
         console.log("urnas:",Object.keys(global.urnas).length);
         console.log("---------------------------------");
     };
-    var definicaoEvento = function(evento, funcaoSucessoRequisicao){
+    var definicaoEvento = function (evento, funcaoSucessoRequisicao) {
 
-        socket.on(evento,function(dados){
+        socket.on(evento, function (dados) {
             console.log("[Evento]_( " + evento + " )");
             console.log("---------------------------------");
             console.log("DADO:",dados);
@@ -43,11 +43,11 @@ module.exports = function(socket){
         });
     };
 
-    var enviarCliente = function(mensagem,dados){
+    var enviarCliente = function (mensagem, dados) {
 
         var log = "[Comando]_( " + mensagem + " )\n" +
         "---------------------------------\n";
-        if(dados) {
+        if (dados) {
             socket.emit(mensagem,dados);
             log += "DADO:\n" + JSON.stringify(dados) + "\n";
         } else {
@@ -67,7 +67,7 @@ module.exports = function(socket){
     // Função responsável por criar e enviar uma chave
     // ao usuário recém
 
-    var enviarChaveParaUsuario = function(){
+    var enviarChaveParaUsuario = function () {
 
         var timestamp = new Date().getTime();
         var id = socket.id;
@@ -79,21 +79,21 @@ module.exports = function(socket){
             tipo: 'nao-autenticado'
         };
 
-        enviarCliente( "atualizar-chave", chave );
+        enviarCliente("atualizar-chave", chave);
     };
 
     // Função responsável por informar se o usuario é válido
     // de acordo com os dados de autenticação (login e senha) informados
 
-    var validarUsuario = function( dados, funcaoSucesso, funcaoFalha ){
+    var validarUsuario = function (dados, funcaoSucesso, funcaoFalha) {
 
-        var procurarUsuarioValido = function(baseDados){
+        var procurarUsuarioValido = function (baseDados) {
 
             var usuarioValido;
 
-            baseDados.every( function( elemento ){
-                if( 'login' in elemento && 'senha' in elemento && 'login' in dados && 'senha' in dados ){
-                    if( elemento.login === dados.login && elemento.senha === dados.senha ){
+            baseDados.every(function (elemento) {
+                if ('login' in elemento && 'senha' in elemento && 'login' in dados && 'senha' in dados) {
+                    if (elemento.login === dados.login && elemento.senha === dados.senha) {
                         usuarioValido = elemento;
                         return false;
                     }
@@ -101,46 +101,45 @@ module.exports = function(socket){
                 return true;
             });
 
-            funcaoSucesso( usuarioValido );
+            funcaoSucesso(usuarioValido);
         };
 
-        crud.obterTudo( 'login', procurarUsuarioValido, funcaoFalha );
+        crud.obterTudo('login', procurarUsuarioValido, funcaoFalha);
     };
 
     //---------------------------------------------------------------
     // URNA
 
-    var disponibilizarUrna = function(){
+    var disponibilizarUrna = function () {
 
-        fs.readFile('cliente/htmls/urna.html', function ( mensagemErro, aplicacao ) {
+        fs.readFile('cliente/htmls/urna.html', function (mensagemErro, aplicacao) {
 
             var paginaUrna = fs.readFileSync("cliente/htmls/urna.html").toString();
             var urnaAtual = global.urnas[socket.id];
-            var mesario = global.mesarios[ urnaAtual.mesario ];
+            var mesario = global.mesarios[urnaAtual.mesario];
             var socketMesario = global.usuariosOnline[mesario.socket].socket;
 
-            if( mensagemErro ){
+            if (mensagemErro) {
                 falhaValidacaoRequisicao();
             } else {
                 var urnas = [];
                 var numeroUrnas = 0;
-                for( var socketIdUrna in global.urnas ){
-
-                    var socketUrna = global.usuariosOnline[ socketIdUrna ].socket;
-                    var urna = global.urnas[ socketIdUrna ];
+                for (var socketIdUrna in global.urnas) {
+                    var socketUrna = global.usuariosOnline[socketIdUrna].socket;
+                    var urna = global.urnas[socketIdUrna];
                     numeroUrnas++;
-                    if( urna.mesario === urnaAtual.mesario )
+                    if(urna.mesario === urnaAtual.mesario)
                     {
-                        urnas.push( {
+                        urnas.push({
                             index: numeroUrnas,
                             id: socket.id,
                             ip: socketUrna.handshake.address.address,
                             porta: socketUrna.handshake.address.port
                         });
                     }
-                    if( numeroUrnas === Object.keys(global.urnas).length ){
-                        enviarCliente( "disponibilizar-aplicacao", paginaUrna.toString() );
-                        socketMesario.emit( "obter-todas-urnas", urnas );
+                    if (numeroUrnas === Object.keys(global.urnas).length) {
+                        enviarCliente("disponibilizar-aplicacao", paginaUrna.toString());
+                        socketMesario.emit("obter-todas-urnas", urnas);
                     }
                 }
             }
@@ -149,40 +148,39 @@ module.exports = function(socket){
 
     // MESARIO
 
-    var disponibilizarAplicacao = function(){
+    var disponibilizarAplicacao = function () {
         var controles = ['administradores','eleitores','candidatos','partidos','coligacoes'];
 
-        fs.readFile('cliente/htmls/aplicacao.html', function ( mensagemErro, aplicacao ) {
+        fs.readFile('cliente/htmls/aplicacao.html', function (mensagemErro, aplicacao) {
 
-            if( mensagemErro ){
+            if (mensagemErro) {
                 falhaValidacaoRequisicao();
             } else {
 
-                enviarCliente( "disponibilizar-aplicacao", aplicacao.toString() );
+                enviarCliente("disponibilizar-aplicacao", aplicacao.toString());
             }
         });
 
-        definicaoEvento( "iniciar-eleicao", function(){
+        definicaoEvento("iniciar-eleicao", function () {
             global.eleicaoIniciada = true;
             console.log('-------------------------------------------');
             console.log('Início Eleição');
             console.log('-------------------------------------------');
             fs.readFile('cliente/htmls/monitor.html', function ( mensagemErro, monitor ) {
 
-                if( mensagemErro ){
+                if (mensagemErro) {
                     falhaValidacaoRequisicao();
                 } else {
-
                     enviarCliente( "disponibilizar-aplicacao", monitor.toString() );
                 }
             });
         });
 
-        definicaoEvento( "obter-por-titulo-urna", function( dados ){
+        definicaoEvento("obter-por-titulo-urna", function (dados) {
 
             var titulo = dados.titulo;
 
-            var sucessoObtencaoPorTitulo = function(eleitor){
+            var sucessoObtencaoPorTitulo = function (eleitor) {
 
                 console.log('Obtenção de eleitor por titulo ocorreu com Sucesso!');
                 var novosDados = {
@@ -194,34 +192,33 @@ module.exports = function(socket){
                 socket.emit('atualizar-urna',novosDados);
             };
 
-            var falhaObtencaoPorTitulo = function( mensagemErro ){
+            var falhaObtencaoPorTitulo = function (mensagemErro) {
 
                 console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
-                console.log( mensagemErro );
+                console.log(mensagemErro);
             };
 
             crud.obterPorPropriedade('eleitores','titulo',titulo,sucessoObtencaoPorTitulo,falhaObtencaoPorTitulo);
         });
 
-        definicaoEvento( "habilitar-voto", function(dados){
+        definicaoEvento( "habilitar-voto", function (dados) {
             var urna = global.usuariosOnline[ dados.urna ];
 
-            fs.readFile('cliente/htmls/votos.html', function ( mensagemErro, paginaUrna ) {
+            fs.readFile('cliente/htmls/votos.html', function (mensagemErro, paginaUrna) {
 
-                if( mensagemErro ){
+                if(mensagemErro) {
                     falhaValidacaoRequisicao();
                 } else {
-
                     urna.socket.emit("disponibilizar-aplicacao", paginaUrna.toString() );
                 }
             });
         });
 
-        definicaoEvento("disconnect", function(){
-            for(var ponteiroMesario in global.mesarios){
+        definicaoEvento("disconnect", function () {
+            for (var ponteiroMesario in global.mesarios) {
                 console.log(ponteiroMesario);
                 var mesario = global.mesarios[ponteiroMesario];
-                if( mesario.socket === socket.id ){
+                if (mesario.socket === socket.id) {
                     delete global.mesarios[ponteiroMesario];
                     break;
                 }
@@ -229,39 +226,39 @@ module.exports = function(socket){
 
         });
 
-        var controlesSecao = require( './secao' )( socket, global );
-        definicaoEvento( 'secao-obter-tudo', controlesSecao.obterTudo );
-        definicaoEvento( 'secao-atualizar', controlesSecao.atualizar );
+        var controlesSecao = require('./secao')(socket, global);
+        definicaoEvento('secao-obter-tudo', controlesSecao.obterTudo);
+        definicaoEvento('secao-atualizar', controlesSecao.atualizar);
 
-        controles.forEach( function( nomeModelo ){
+        controles.forEach( function (nomeModelo) {
 
-            var controlesModelo = require( './' + nomeModelo )( socket, global );
-            definicaoEvento( nomeModelo + '-obter-tudo', controlesModelo.obterTudo );
-            definicaoEvento( nomeModelo + '-inserir', controlesModelo.inserir );
-            definicaoEvento( nomeModelo + '-alterar', controlesModelo.alterar );
-            definicaoEvento( nomeModelo + '-excluir', controlesModelo.excluir );
+            var controlesModelo = require('./' + nomeModelo)(socket, global);
+            definicaoEvento(nomeModelo + '-obter-tudo', controlesModelo.obterTudo);
+            definicaoEvento(nomeModelo + '-inserir', controlesModelo.inserir);
+            definicaoEvento(nomeModelo + '-alterar', controlesModelo.alterar);
+            definicaoEvento(nomeModelo + '-excluir', controlesModelo.excluir);
         });
 
-        definicaoEvento('realizar-logout',function(){
+        definicaoEvento('realizar-logout', function () {
             realizarLogout();
         });
     };
 
     // LOGOUT
 
-    var realizarLogout = function(){
+    var realizarLogout = function () {
 
-        enviarCliente( 'realizar-logout' );
+        enviarCliente('realizar-logout');
     };
 
     // Executa esta função em caso de sucesso na validação do usuario
-    var sucessoValidacaoUsuario = function( usuarioValido){
+    var sucessoValidacaoUsuario = function (usuarioValido) {
 
-        if(usuarioValido){
+        if (usuarioValido) {
 
-            var tipoUsuario = verificarUsuarioLogado( usuarioValido );
+            var tipoUsuario = verificarUsuarioLogado(usuarioValido);
 
-            switch( tipoUsuario ){
+            switch(tipoUsuario) {
 
                 case "urna":
                     disponibilizarUrna();
@@ -276,34 +273,34 @@ module.exports = function(socket){
                     break;
             }
         } else {
-            enviarCliente( 'falha-autenticacao', 'Login ou senha inválidos!' );
+            enviarCliente('falha-autenticacao', 'Login ou senha inválidos!');
         }
 
     };
 
     // Executa esta função em caso de falha na validação do usuário
-    var falhaValidacaoUsuario = function( mensagemErro ){
+    var falhaValidacaoUsuario = function (mensagemErro) {
 
-        enviarCliente( 'falha-autenticacao', 'Ocorreu acesso indevido ao servidor!' );
-        console.log( mensagemErro );
+        enviarCliente('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!');
+        console.log(mensagemErro);
     };
 
     // Executa esta função em caso de sucesso na requisição realizada pelo usuario
 
-    var sucessoValidacaoRequisicao = function( dadosAutenticacao ){
+    var sucessoValidacaoRequisicao = function (dadosAutenticacao) {
 
-        validarUsuario( dadosAutenticacao, sucessoValidacaoUsuario, falhaValidacaoUsuario );
+        validarUsuario(dadosAutenticacao, sucessoValidacaoUsuario, falhaValidacaoUsuario);
     };
 
     // Função que verifica o usuario já validado
     // informando ou se está logado ou retorna o tipo de acesso
 
-    var verificarUsuarioLogado = function(dadosAutenticacao){
+    var verificarUsuarioLogado = function (dadosAutenticacao) {
 
-        var chave = global.usuariosOnline[ socket.id ].chave;
-        if( dadosAutenticacao.id in global.mesarios ){
-            if( global.eleicaoIniciada ){
-                global.usuariosOnline[ socket.id ].tipo = "urna";
+        var chave = global.usuariosOnline[socket.id].chave;
+        if (dadosAutenticacao.id in global.mesarios) {
+            if(global.eleicaoIniciada) {
+                global.usuariosOnline[socket.id].tipo = "urna";
                 global.urnas[socket.id] = {
                     chave: chave,
                     mesario: dadosAutenticacao.id
@@ -313,8 +310,8 @@ module.exports = function(socket){
                 return "usuario-ja-logado";
             }
         } else {
-            global.usuariosOnline[ socket.id ].tipo = "mesario";
-            global.mesarios[ dadosAutenticacao.id ] = {
+            global.usuariosOnline[socket.id].tipo = "mesario";
+            global.mesarios[dadosAutenticacao.id] = {
                 chave: chave,
                 socket: socket.id
             };

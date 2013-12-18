@@ -5,38 +5,38 @@ module.exports = function( socket, global ){
 
     return {
 
-        obterTudo: function(){
+        obterTudo: function () {
 
-            var sucessoObtencao = function( dadosSecao ){
+            var sucessoObtencao = function (dadosSecao) {
 
                 console.log('Obtenção de todos dadosSecao ocorreu com Sucesso!');
-                socket.emit( 'secao-obter-tudo', dadosSecao );
+                socket.emit('secao-obter-tudo', dadosSecao);
             };
 
-            var falhaObtencao = function( mensagemErro ){
+            var falhaObtencao = function (mensagemErro) {
 
                 console.log('Ocorreu uma falha na obtenção de todos secao! Erro:');
-                console.log( mensagemErro );
+                console.log(mensagemErro);
             };
 
-            crud.obterTudo( 'secao', sucessoObtencao, falhaObtencao );
+            crud.obterTudo('secao', sucessoObtencao, falhaObtencao);
         },
 
-        atualizar: function( secao ){
+        atualizar: function (secao) {
 
-            var sucessoAlteracao = function(dadosSecao){
+            var sucessoAlteracao = function (dadosSecao) {
 
                 console.log('Secao alterado com Sucesso!');
-                socket.emit( 'secao-obter-tudo', dadosSecao );
+                socket.emit('secao-obter-tudo', dadosSecao);
             };
 
-            var falhaAlteracao = function( mensagemErro ){
+            var falhaAlteracao = function (mensagemErro) {
 
                 console.log('Ocorreu uma falha na alteração de secao! Erro:');
-                console.log( mensagemErro );
+                console.log(mensagemErro);
             };
 
-            crud.atualizar( 'secao', secao, sucessoAlteracao, falhaAlteracao );
+            crud.atualizar('secao', secao, sucessoAlteracao, falhaAlteracao);
         }
     };
 };

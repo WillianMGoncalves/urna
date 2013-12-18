@@ -1,22 +1,22 @@
+"use strict";
+
 var fs = require("fs");
 
-var obterTudo = function( enderecoArquivo, funcaoSucesso, funcaoFalha ){
+var obterTudo = function (enderecoArquivo, funcaoSucesso, funcaoFalha) {
 
-    if( typeof funcaoSucesso != "function" ){
+    if(typeof funcaoSucesso != "function") {
         throw "É necessário passar uma função de sucesso como parâmetro";
     }
 
-    if( typeof funcaoFalha != "function" ){
+    if(typeof funcaoFalha != "function") {
         throw "É necessário passar uma função de falha como parâmetro";
     }
 
-    fs.readFile('servidor/baseDados/' + enderecoArquivo + '.json', function ( mensagemErro, baseDadosString ) {
+    fs.readFile('servidor/baseDados/' + enderecoArquivo + '.json', function (mensagemErro, baseDadosString) {
 
-        if( mensagemErro ){
-
-            funcaoFalha( mensagemErro )
+        if(mensagemErro) {
+            funcaoFalha(mensagemErro);
         } else {
-
             var baseDados = JSON.parse(baseDadosString);
             funcaoSucesso(baseDados);
         }
@@ -24,18 +24,15 @@ var obterTudo = function( enderecoArquivo, funcaoSucesso, funcaoFalha ){
 };
 
 
-var obterPorPropriedade = function( enderecoArquivo, nomePropriedade, valorPropriedade, funcaoSucesso, funcaoFalha ){
+var obterPorPropriedade = function (enderecoArquivo, nomePropriedade, valorPropriedade, funcaoSucesso, funcaoFalha) {
 
-    var novaFuncaoSucesso = function(baseDados){
-
-        var resposta = function(){
+    var novaFuncaoSucesso = function (baseDados) {
+        var resposta = function () {
             var resposta = [];
-
-            for( var indice = 0; indice < baseDados.length; indice++ )
-            {
+            for (var indice = 0; indice < baseDados.length; indice++) {
                 var elemento = baseDados[indice];
-                if( nomePropriedade in elemento ){
-                    if( elemento[nomePropriedade] == valorPropriedade ){
+                if (nomePropriedade in elemento) {
+                    if(elemento[nomePropriedade] == valorPropriedade) {
                         resposta = elemento;
                         break;
                     }
