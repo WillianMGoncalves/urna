@@ -1,18 +1,19 @@
-/*global exports, buster*/
+/*global describe, require, it*/
 
-"use strict";
+var assert = require('assert'),
+    test = require('selenium-webdriver/testing'),
+    webdriver = require('selenium-webdriver');
 
-exports.name = "Tela Login";
+test.describe('Login', function() {
+    test.it('Entrada', function() {
+        var driver = new webdriver.Builder().build();
 
-exports.tests = [{
+        var login = driver.findElement(webdriver.By.id('formulario-autenticacao-login'));
+        login.sendKeys('webdriver');
+        login.getAttribute('value').then(function(value) {
+            assert.equal(value, 'webdriver');
+        });
 
-    name: "Verifica se a página possui título",
-    func: function (done) {
-
-        exports.driver
-            .getTitle(function (title) {
-                buster.assertions.assert(title.indexOf('Urna Eletrônica') !== -1);
-            })
-            .end(done);
-    }}
-];
+        driver.quit();
+    });
+});

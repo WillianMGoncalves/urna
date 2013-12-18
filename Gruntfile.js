@@ -107,11 +107,16 @@ module.exports = function(grunt){
             }
         },
         mochaTest: {
-            mochaTest: {
+            servidorJs: {
                 options: {
                     reporter: 'spec'
                 },
                 src: ['testes/*.js']
+            }
+        },
+        mochaSelenium: {
+            interface: {
+                src: ['testesInterface/*.js']
             }
         },
         jshint: {
@@ -131,7 +136,7 @@ module.exports = function(grunt){
         },
         webdriver: {
             prod: {
-                url: 'https://urna.herokuapp.com/',
+                url: 'http://localhost:4000/',
                 tests: ['testesInteface/*.js']
             }
         }
@@ -151,9 +156,9 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-webdriver');
+    grunt.loadNpmTasks('grunt-mocha-selenium');
 
-    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:mochaTest','webdriver:prod','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
+    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:servidorJs','mochaSelenium:interface','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
     grunt.registerTask('pages', ['jade:compile']);
 
     grunt.registerTask('default',[]);
