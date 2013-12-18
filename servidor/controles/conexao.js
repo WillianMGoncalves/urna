@@ -110,6 +110,7 @@ this.module.exports = function (socket, global) {
 
         disponibilizarUrna = function () {
 
+
             fs.readFile('cliente/htmls/urna.html', function (mensagemErro, paginaUrnaHtml) {
 
                 var urnaAtual = global.urnas[socket.id],
