@@ -1,7 +1,9 @@
-var crud = this.require('../modelos/crud');
-var utils = this.require('./utils');
+/*global require, module, console */
 
-this.module.exports = function (socket) {
+var crud = require('../modelos/crud'),
+    utils = require('./utils');
+
+module.exports = function (socket) {
     "use strict";
 
     return {
@@ -10,11 +12,11 @@ this.module.exports = function (socket) {
 
             var sucessoAtualizacao = function () {
 
-                this.console.log('Atualizacao do candidato realizada com Sucesso!');
+                console.log('Atualizacao do candidato realizada com Sucesso!');
             }, falhaAtualizacao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na atualizacao de candidato! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na atualizacao de candidato! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.atualizar('candidatos', candidato, sucessoAtualizacao, falhaAtualizacao);
@@ -24,12 +26,12 @@ this.module.exports = function (socket) {
 
             var sucessoObtencao = function (candidatos) {
 
-                this.console.log('Obtenção de todos candidatos ocorreu com Sucesso!');
+                console.log('Obtenção de todos candidatos ocorreu com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
             }, falhaObtencao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na obtenção de todos candidato! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na obtenção de todos candidato! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterTudo('candidatos', sucessoObtencao, falhaObtencao);
@@ -39,11 +41,11 @@ this.module.exports = function (socket) {
 
             var sucessoObtencaoPorId = function () {
 
-                this.console.log('Obtenção de todos candidatos ocorreu com Sucesso!');
+                console.log('Obtenção de todos candidatos ocorreu com Sucesso!');
             }, falhaObtencaoPorId = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na otenção de candidato! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na otenção de candidato! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterId('candidatos', id, sucessoObtencaoPorId, falhaObtencaoPorId);
@@ -53,12 +55,12 @@ this.module.exports = function (socket) {
 
             var sucessoInsercao = function (candidatos) {
 
-                this.console.log('Candidato inserido com Sucesso!');
+                console.log('Candidato inserido com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
             }, falhaInsercao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na inserção de candidato! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na inserção de candidato! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.inserir('candidatos', candidato, sucessoInsercao, falhaInsercao);
@@ -68,12 +70,12 @@ this.module.exports = function (socket) {
 
             var sucessoAlteracao = function (candidatos) {
 
-                this.console.log('Candidato alterado com Sucesso!');
+                console.log('Candidato alterado com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
             }, falhaAlteracao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na alteração de candidato! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na alteração de candidato! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.alterar('candidatos', candidato.id, candidato, sucessoAlteracao, falhaAlteracao);
@@ -83,12 +85,12 @@ this.module.exports = function (socket) {
 
             var sucessoExclucao = function (candidatos) {
 
-                this.console.log('Candidato excluido com Sucesso!');
+                console.log('Candidato excluido com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
             }, falhaExclusao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na exclusão de candidato! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na exclusão de candidato! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.excluir('candidatos', candidato, sucessoExclucao, falhaExclusao);

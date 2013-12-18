@@ -1,7 +1,9 @@
-var crud = this.require('../modelos/crud'),
-    utils = this.require('./utils');
+/*global require, module, console */
 
-this.module.exports = function (socket) {
+var crud = require('../modelos/crud'),
+    utils = require('./utils');
+
+module.exports = function (socket) {
     "use strict";
 
     return {
@@ -10,11 +12,11 @@ this.module.exports = function (socket) {
 
             var sucessoAtualizacao = function () {
 
-                this.console.log('Atualizacao do coligacao realizada com Sucesso!');
+                console.log('Atualizacao do coligacao realizada com Sucesso!');
             }, falhaAtualizacao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na atualizacao de coligacao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na atualizacao de coligacao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.atualizar('coligacoes', coligacao, sucessoAtualizacao, falhaAtualizacao);
@@ -24,12 +26,12 @@ this.module.exports = function (socket) {
 
             var sucessoObtencao = function (coligacoes) {
 
-                this.console.log('Obtenção de todos coligacoes ocorreu com Sucesso!');
+                console.log('Obtenção de todos coligacoes ocorreu com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
             }, falhaObtencao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na obtenção de todos coligacao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na obtenção de todos coligacao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterTudo('coligacoes', sucessoObtencao, falhaObtencao);
@@ -39,11 +41,11 @@ this.module.exports = function (socket) {
 
             var sucessoObtencaoPorId = function () {
 
-                this.console.log('Obtenção de todos coligacoes ocorreu com Sucesso!');
+                console.log('Obtenção de todos coligacoes ocorreu com Sucesso!');
             }, falhaObtencaoPorId = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na otenção de coligacao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na otenção de coligacao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterId('coligacoes', id, sucessoObtencaoPorId, falhaObtencaoPorId);
@@ -53,12 +55,12 @@ this.module.exports = function (socket) {
 
             var sucessoInsercao = function (coligacoes) {
 
-                this.console.log('Coligacao inserido com Sucesso!');
+                console.log('Coligacao inserido com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
             }, falhaInsercao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na inserção de coligacao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na inserção de coligacao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.inserir('coligacoes', coligacao, sucessoInsercao, falhaInsercao);
@@ -68,12 +70,12 @@ this.module.exports = function (socket) {
 
             var sucessoAlteracao = function (coligacoes) {
 
-                this.console.log('Coligacao alterado com Sucesso!');
+                console.log('Coligacao alterado com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
             }, falhaAlteracao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na alteração de coligacao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na alteração de coligacao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.alterar('coligacoes', coligacao.id, coligacao, sucessoAlteracao, falhaAlteracao);
@@ -83,12 +85,12 @@ this.module.exports = function (socket) {
 
             var sucessoExclucao = function (coligacoes) {
 
-                this.console.log('Coligacao excluido com Sucesso!');
+                console.log('Coligacao excluido com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
             }, falhaExclusao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na exclusão de coligacao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na exclusão de coligacao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.excluir('coligacoes', coligacao, sucessoExclucao, falhaExclusao);

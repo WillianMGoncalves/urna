@@ -1,7 +1,9 @@
-var crud = this.require('../modelos/crud'),
-    utils = this.require('./utils');
+/*global require, module, console */
 
-this.module.exports = function (socket) {
+var crud = require('../modelos/crud'),
+    utils = require('./utils');
+
+module.exports = function (socket) {
     "use strict";
 
     return {
@@ -10,11 +12,11 @@ this.module.exports = function (socket) {
 
             var sucessoAtualizacao = function () {
 
-                this.console.log('Atualizacao do eleitor realizada com Sucesso!');
+                console.log('Atualizacao do eleitor realizada com Sucesso!');
             }, falhaAtualizacao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na atualizacao de eleitor! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na atualizacao de eleitor! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.atualizar('eleitores', eleitor, sucessoAtualizacao, falhaAtualizacao);
@@ -24,12 +26,12 @@ this.module.exports = function (socket) {
 
             var sucessoObtencao = function (eleitores) {
 
-                this.console.log('Obtenção de todos eleitores ocorreu com Sucesso!');
+                console.log('Obtenção de todos eleitores ocorreu com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
             }, falhaObtencao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na obtenção de todos eleitor! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na obtenção de todos eleitor! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterTudo('eleitores', sucessoObtencao, falhaObtencao);
@@ -39,11 +41,11 @@ this.module.exports = function (socket) {
 
             var sucessoObtencaoPorId = function () {
 
-                this.console.log('Obtenção de todos eleitores ocorreu com Sucesso!');
+                console.log('Obtenção de todos eleitores ocorreu com Sucesso!');
             }, falhaObtencaoPorId = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterId('eleitores', id, sucessoObtencaoPorId, falhaObtencaoPorId);
@@ -53,12 +55,12 @@ this.module.exports = function (socket) {
 
             var sucessoInsercao = function (eleitores) {
 
-                this.console.log('Eleitor inserido com Sucesso!');
+                console.log('Eleitor inserido com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
             }, falhaInsercao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na inserção de eleitor! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na inserção de eleitor! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.inserir('eleitores', eleitor, sucessoInsercao, falhaInsercao);
@@ -68,12 +70,12 @@ this.module.exports = function (socket) {
 
             var sucessoAlteracao = function (eleitores) {
 
-                this.console.log('Eleitor alterado com Sucesso!');
+                console.log('Eleitor alterado com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
             }, falhaAlteracao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na alteração de eleitor! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na alteração de eleitor! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.alterar('eleitores', eleitor.id, eleitor, sucessoAlteracao, falhaAlteracao);
@@ -83,12 +85,12 @@ this.module.exports = function (socket) {
 
             var sucessoExclucao = function (eleitores) {
 
-                this.console.log('Eleitor excluido com Sucesso!');
+                console.log('Eleitor excluido com Sucesso!');
                 socket.emit('eleitores-obter-tudo', eleitores);
             }, falhaExclusao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na exclusão de eleitor! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na exclusão de eleitor! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.excluir('eleitores', eleitor, sucessoExclucao, falhaExclusao);

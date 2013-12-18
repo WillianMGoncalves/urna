@@ -1,7 +1,9 @@
-var crud = this.require('../modelos/crud'),
-    utils = this.require('./utils');
+/*global require, module, console */
 
-this.module.exports = function (socket) {
+var crud = require('../modelos/crud'),
+    utils = require('./utils');
+
+module.exports = function (socket) {
 
     "use strict";
 
@@ -11,12 +13,12 @@ this.module.exports = function (socket) {
 
             var sucessoObtencao = function (dadosSecao) {
 
-                this.console.log('Obtenção de todos dadosSecao ocorreu com Sucesso!');
+                console.log('Obtenção de todos dadosSecao ocorreu com Sucesso!');
                 socket.emit('secao-obter-tudo', dadosSecao);
             }, falhaObtencao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na obtenção de todos secao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na obtenção de todos secao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.obterTudo('secao', sucessoObtencao, falhaObtencao);
@@ -26,12 +28,12 @@ this.module.exports = function (socket) {
 
             var sucessoAlteracao = function (dadosSecao) {
 
-                this.console.log('Secao alterado com Sucesso!');
+                console.log('Secao alterado com Sucesso!');
                 socket.emit('secao-obter-tudo', dadosSecao);
             }, falhaAlteracao = function (mensagemErro) {
 
-                this.console.log('Ocorreu uma falha na alteração de secao! Erro:');
-                this.console.log(mensagemErro);
+                console.log('Ocorreu uma falha na alteração de secao! Erro:');
+                console.log(mensagemErro);
             };
 
             crud.atualizar('secao', secao, sucessoAlteracao, falhaAlteracao);

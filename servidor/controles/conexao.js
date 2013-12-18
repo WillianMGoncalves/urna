@@ -1,11 +1,12 @@
-this.module.exports = function (socket, global) {
+/*global require, module, console, verificarUsuarioLogado, realizarLogout*/
+
+module.exports = function (socket, global) {
     "use strict";
     // Variáveis e bibliotecas
 
-    var configuracoes = this.require('../configuracoes/configuracoes'),
-        utils = this.require('./utils'),
-        crud = this.require('../modelos/crud'),
-        fs = this.require('fs'),
+    var utils = require('./utils'),
+        crud = require('../modelos/crud'),
+        fs = require('fs'),
 
         // Utilitários
         //------------------------------
@@ -15,7 +16,7 @@ this.module.exports = function (socket, global) {
         falhaValidacaoRequisicao = function (mensagemErro) {
 
             socket.emit('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!');
-            this.console.log(mensagemErro);
+            console.log(mensagemErro);
         },
 
         // Função que returna uma função que será callback de uma solicitação
@@ -24,19 +25,19 @@ this.module.exports = function (socket, global) {
         // "falhaValidacaoRequisicao"
 
         visualizarGlobal = function () {
-            this.console.log("[GLOBAL]");
-            this.console.log("---------------------------------");
-            this.console.log("mesarios:", Object.keys(global.mesarios).length);
-            this.console.log("urnas:", Object.keys(global.urnas).length);
-            this.console.log("---------------------------------");
+            console.log("[GLOBAL]");
+            console.log("---------------------------------");
+            console.log("mesarios:", Object.keys(global.mesarios).length);
+            console.log("urnas:", Object.keys(global.urnas).length);
+            console.log("---------------------------------");
         },
         definicaoEvento = function (evento, funcaoSucessoRequisicao) {
 
             socket.on(evento, function (dados) {
-                this.console.log("[Evento]_( " + evento + " )");
-                this.console.log("---------------------------------");
-                this.console.log("DADO:", dados);
-                this.console.log("---------------------------------");
+                console.log("[Evento]_( " + evento + " )");
+                console.log("---------------------------------");
+                console.log("DADO:", dados);
+                console.log("---------------------------------");
                 visualizarGlobal();
                 utils.validacaoRequisicoes(dados, funcaoSucessoRequisicao, falhaValidacaoRequisicao);
             });
@@ -50,10 +51,10 @@ this.module.exports = function (socket, global) {
                 log += "DADO:\n" + JSON.stringify(dados) + "\n";
             } else {
                 socket.emit(mensagem);
-                this.console.log("SEM DADOS\n");
+                console.log("SEM DADOS\n");
             }
             log += "---------------------------------\n";
-            this.console.log(log);
+            console.log(log);
             visualizarGlobal();
         },
 
@@ -121,26 +122,29 @@ this.module.exports = function (socket, global) {
                     socketUrna,
                     urnas = [],
                     urna,
+                    todasUrnas = global.urnas,
                     numeroUrnas = 0;
 
                 if (mensagemErro) {
                     falhaValidacaoRequisicao();
                 } else {
-                    for (socketIdUrna in global.urnas) {
-                        socketUrna = global.usuariosOnline[socketIdUrna].socket;
-                        urna = global.urnas[socketIdUrna];
-                        numeroUrnas++;
-                        if (urna.mesario === urnaAtual.mesario) {
-                            urnas.push({
-                                index: numeroUrnas,
-                                id: socket.id,
-                                ip: socketUrna.handshake.address.address,
-                                porta: socketUrna.handshake.address.port
-                            });
-                        }
-                        if (numeroUrnas === Object.keys(global.urnas).length) {
-                            enviarCliente("disponibilizar-aplicacao", paginaUrna.toString());
-                            socketMesario.emit("obter-todas-urnas", urnas);
+                    for (socketIdUrna in todasUrnas) {
+                        if (todasUrnas.hasOwnProperty(socketIdUrna)) {
+                            socketUrna = global.usuariosOnline[socketIdUrna].socket;
+                            urna = todasUrnas[socketIdUrna];
+                            numeroUrnas = numeroUrnas + 1;
+                            if (urna.mesario === urnaAtual.mesario) {
+                                urnas.push({
+                                    index: numeroUrnas,
+                                    id: socket.id,
+                                    ip: socketUrna.handshake.address.address,
+                                    porta: socketUrna.handshake.address.port
+                                });
+                            }
+                            if (numeroUrnas === Object.keys(global.urnas).length) {
+                                enviarCliente("disponibilizar-aplicacao", paginaUrna.toString());
+                                socketMesario.emit("obter-todas-urnas", urnas);
+                            }
                         }
                     }
                 }
@@ -150,7 +154,8 @@ this.module.exports = function (socket, global) {
         // MESARIO
 
         disponibilizarAplicacao = function () {
-            var controles = ['administradores','eleitores','candidatos','partidos','coligacoes'];
+            var controles = ['administradores', 'eleitores', 'candidatos', 'partidos', 'coligacoes'],
+                controlesSecao = require('./secao')(socket, global);
 
             fs.readFile('cliente/htmls/aplicacao.html', function (mensagemErro, aplicacao) {
 
@@ -164,74 +169,76 @@ this.module.exports = function (socket, global) {
 
             definicaoEvento("iniciar-eleicao", function () {
                 global.eleicaoIniciada = true;
-                this.console.log('-------------------------------------------');
-                this.console.log('Início Eleição');
-                this.console.log('-------------------------------------------');
-                fs.readFile('cliente/htmls/monitor.html', function ( mensagemErro, monitor ) {
+                console.log('-------------------------------------------');
+                console.log('Início Eleição');
+                console.log('-------------------------------------------');
+                fs.readFile('cliente/htmls/monitor.html', function (mensagemErro, monitor) {
 
                     if (mensagemErro) {
                         falhaValidacaoRequisicao();
                     } else {
-                        enviarCliente( "disponibilizar-aplicacao", monitor.toString() );
+                        enviarCliente("disponibilizar-aplicacao", monitor.toString());
                     }
                 });
             });
 
             definicaoEvento("obter-por-titulo-urna", function (dados) {
 
-                var titulo = dados.titulo;
+                var titulo = dados.titulo,
+                    sucessoObtencaoPorTitulo = function (eleitor) {
 
-                var sucessoObtencaoPorTitulo = function (eleitor) {
-
-                    this.console.log('Obtenção de eleitor por titulo ocorreu com Sucesso!');
-                    var novosDados = {
-                        titulo: dados.titulo,
-                        urna: dados.urna,
-                        eleitor: eleitor,
-                        teste: 'ok'
+                        console.log('Obtenção de eleitor por titulo ocorreu com Sucesso!');
+                        var novosDados = {
+                            titulo: dados.titulo,
+                            urna: dados.urna,
+                            eleitor: eleitor,
+                            teste: 'ok'
+                        };
+                        socket.emit('atualizar-urna', novosDados);
+                    },
+                    falhaObtencaoPorTitulo = function (mensagemErro) {
+                        console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
+                        console.log(mensagemErro);
                     };
-                    socket.emit('atualizar-urna',novosDados);
-                };
 
-                var falhaObtencaoPorTitulo = function (mensagemErro) {
-
-                    this.console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
-                    this.console.log(mensagemErro);
-                };
-
-                crud.obterPorPropriedade('eleitores','titulo',titulo,sucessoObtencaoPorTitulo,falhaObtencaoPorTitulo);
+                crud.obterPorPropriedade('eleitores', 'titulo', titulo, sucessoObtencaoPorTitulo, falhaObtencaoPorTitulo);
             });
 
-            definicaoEvento( "habilitar-voto", function (dados) {
-                var urna = global.usuariosOnline[ dados.urna ];
+            definicaoEvento("habilitar-voto", function (dados) {
+                var urna = global.usuariosOnline[dados.urna];
 
                 fs.readFile('cliente/htmls/votos.html', function (mensagemErro, paginaUrna) {
 
-                    if(mensagemErro) {
+                    if (mensagemErro) {
                         falhaValidacaoRequisicao();
                     } else {
-                        urna.socket.emit("disponibilizar-aplicacao", paginaUrna.toString() );
+                        urna.socket.emit("disponibilizar-aplicacao", paginaUrna.toString());
                     }
                 });
             });
 
             definicaoEvento("disconnect", function () {
-                for (var ponteiroMesario in global.mesarios) {
-                    this.console.log(ponteiroMesario);
-                    var mesario = global.mesarios[ponteiroMesario];
-                    if (mesario.socket === socket.id) {
-                        delete global.mesarios[ponteiroMesario];
-                        break;
+                var ponteiroMesario,
+                    mesario;
+
+                for (ponteiroMesario in global.mesarios) {
+
+                    if (global.mesarios.hasOwnProperty(ponteiroMesario)) {
+                        console.log(ponteiroMesario);
+                        mesario = global.mesarios[ponteiroMesario];
+                        if (mesario.socket === socket.id) {
+                            delete global.mesarios[ponteiroMesario];
+                            break;
+                        }
                     }
                 }
 
             });
 
-            var controlesSecao = require('./secao')(socket, global);
             definicaoEvento('secao-obter-tudo', controlesSecao.obterTudo);
             definicaoEvento('secao-atualizar', controlesSecao.atualizar);
 
-            controles.forEach( function (nomeModelo) {
+            controles.forEach(function (nomeModelo) {
 
                 var controlesModelo = require('./' + nomeModelo)(socket, global);
                 definicaoEvento(nomeModelo + '-obter-tudo', controlesModelo.obterTudo);
@@ -259,19 +266,18 @@ this.module.exports = function (socket, global) {
 
                 var tipoUsuario = verificarUsuarioLogado(usuarioValido);
 
-                switch(tipoUsuario) {
-
-                    case "urna":
-                        disponibilizarUrna();
-                        break;
-                    case "mesario":
-                        disponibilizarAplicacao();
-                        break;
-                    case "usuario-ja-logado":
-                        realizarLogout();
-                        break;
-                    default:
-                        break;
+                switch (tipoUsuario) {
+                case "urna":
+                    disponibilizarUrna();
+                    break;
+                case "mesario":
+                    disponibilizarAplicacao();
+                    break;
+                case "usuario-ja-logado":
+                    realizarLogout();
+                    break;
+                default:
+                    break;
                 }
             } else {
                 enviarCliente('falha-autenticacao', 'Login ou senha inválidos!');
@@ -283,7 +289,7 @@ this.module.exports = function (socket, global) {
         falhaValidacaoUsuario = function (mensagemErro) {
 
             enviarCliente('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!');
-            this.console.log(mensagemErro);
+            console.log(mensagemErro);
         },
 
         // Executa esta função em caso de sucesso na requisição realizada pelo usuario
@@ -291,40 +297,39 @@ this.module.exports = function (socket, global) {
         sucessoValidacaoRequisicao = function (dadosAutenticacao) {
 
             validarUsuario(dadosAutenticacao, sucessoValidacaoUsuario, falhaValidacaoUsuario);
-        },
+        };
 
         // Função que verifica o usuario já validado
         // informando ou se está logado ou retorna o tipo de acesso
 
-        verificarUsuarioLogado = function (dadosAutenticacao) {
-
-            var chave = global.usuariosOnline[socket.id].chave;
-            if (dadosAutenticacao.id in global.mesarios) {
-                if(global.eleicaoIniciada) {
-                    global.usuariosOnline[socket.id].tipo = "urna";
-                    global.urnas[socket.id] = {
-                        chave: chave,
-                        mesario: dadosAutenticacao.id
-                    };
-                    return "urna";
-                } else {
-                    return "usuario-ja-logado";
-                }
-            } else {
-                global.usuariosOnline[socket.id].tipo = "mesario";
-                global.mesarios[dadosAutenticacao.id] = {
-                    chave: chave,
-                    socket: socket.id
-                };
-                return "mesario";
-            }
-        };
+//        verificarUsuarioLogado = function (dadosAutenticacao) {
+//
+//            var chave = global.usuariosOnline[socket.id].chave;
+//            if (global.mesarios.hasOwnProperty(dadosAutenticacao.id)) {
+//                if (global.eleicaoIniciada) {
+//                    global.usuariosOnline[socket.id].tipo = "urna";
+//                    global.urnas[socket.id] = {
+//                        chave: chave,
+//                        mesario: dadosAutenticacao.id
+//                    };
+//                    return "urna";
+//                }
+//                return "usuario-ja-logado";
+//            }
+//
+//            global.usuariosOnline[socket.id].tipo = "mesario";
+//            global.mesarios[dadosAutenticacao.id] = {
+//                chave: chave,
+//                socket: socket.id
+//            };
+//            return "mesario";
+//        };
 
 //-------------------------------------------------------
 // Função executa quando usuario se conecta (socket.io)
 
     enviarChaveParaUsuario();
 
-    definicaoEvento("autenticar-usuario",sucessoValidacaoRequisicao);
+    definicaoEvento("autenticar-usuario", sucessoValidacaoRequisicao);
 
 };

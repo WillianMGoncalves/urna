@@ -1,3 +1,5 @@
+/*global require, module, console */
+
 var validacaoRequisicoes = function (dadosRequisicao, funcaoSucesso) {
 
     "use strict";
@@ -10,6 +12,6 @@ var validacaoRequisicoes = function (dadosRequisicao, funcaoSucesso) {
 //    }
 };
 
-this.module.exports = {
+module.exports = {
     validacaoRequisicoes: validacaoRequisicoes
 };
