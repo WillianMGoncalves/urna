@@ -1,6 +1,6 @@
 var NavegacaoControles = function (escopo) {
 
-    console.log('Iniciando controlador de navegação');
+    this.console.log('Iniciando controlador de navegação');
     escopo.modeloatual = "eleitores";
 
     socket.on('atualizar-chave', function (chave) {

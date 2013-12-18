@@ -1,4 +1,4 @@
-module.exports = function(socket){
+module.exports = function (socket) {
     "use strict";
     // Variáveis e bibliotecas
 
@@ -14,8 +14,8 @@ module.exports = function(socket){
 
     var falhaValidacaoRequisicao = function (mensagemErro) {
 
-        socket.emit('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!' );
-        console.log(mensagemErro);
+        socket.emit('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!');
+        this.console.log(mensagemErro);
     };
 
     //TODO
@@ -25,19 +25,19 @@ module.exports = function(socket){
     // "falhaValidacaoRequisicao"
 
     var visualizarGlobal = function () {
-        console.log("[GLOBAL]");
-        console.log("---------------------------------");
-        console.log("mesarios:",Object.keys(global.mesarios).length);
-        console.log("urnas:",Object.keys(global.urnas).length);
-        console.log("---------------------------------");
+        this.console.log("[GLOBAL]");
+        this.console.log("---------------------------------");
+        this.console.log("mesarios:",Object.keys(global.mesarios).length);
+        this.console.log("urnas:",Object.keys(global.urnas).length);
+        this.console.log("---------------------------------");
     };
     var definicaoEvento = function (evento, funcaoSucessoRequisicao) {
 
         socket.on(evento, function (dados) {
-            console.log("[Evento]_( " + evento + " )");
-            console.log("---------------------------------");
-            console.log("DADO:",dados);
-            console.log("---------------------------------");
+            this.console.log("[Evento]_( " + evento + " )");
+            this.console.log("---------------------------------");
+            this.console.log("DADO:",dados);
+            this.console.log("---------------------------------");
             visualizarGlobal();
             utils.validacaoRequisicoes(dados,funcaoSucessoRequisicao,falhaValidacaoUsuario);
         });
@@ -52,10 +52,10 @@ module.exports = function(socket){
             log += "DADO:\n" + JSON.stringify(dados) + "\n";
         } else {
             socket.emit(mensagem);
-            console.log("SEM DADOS\n");
+            this.console.log("SEM DADOS\n");
         }
         log += "---------------------------------\n";
-        console.log(log);
+        this.console.log(log);
         visualizarGlobal();
     };
 
@@ -163,9 +163,9 @@ module.exports = function(socket){
 
         definicaoEvento("iniciar-eleicao", function () {
             global.eleicaoIniciada = true;
-            console.log('-------------------------------------------');
-            console.log('Início Eleição');
-            console.log('-------------------------------------------');
+            this.console.log('-------------------------------------------');
+            this.console.log('Início Eleição');
+            this.console.log('-------------------------------------------');
             fs.readFile('cliente/htmls/monitor.html', function ( mensagemErro, monitor ) {
 
                 if (mensagemErro) {
@@ -182,7 +182,7 @@ module.exports = function(socket){
 
             var sucessoObtencaoPorTitulo = function (eleitor) {
 
-                console.log('Obtenção de eleitor por titulo ocorreu com Sucesso!');
+                this.console.log('Obtenção de eleitor por titulo ocorreu com Sucesso!');
                 var novosDados = {
                     titulo: dados.titulo,
                     urna: dados.urna,
@@ -194,8 +194,8 @@ module.exports = function(socket){
 
             var falhaObtencaoPorTitulo = function (mensagemErro) {
 
-                console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
-                console.log(mensagemErro);
+                this.console.log('Ocorreu uma falha na otenção de eleitor! Erro:');
+                this.console.log(mensagemErro);
             };
 
             crud.obterPorPropriedade('eleitores','titulo',titulo,sucessoObtencaoPorTitulo,falhaObtencaoPorTitulo);
@@ -216,7 +216,7 @@ module.exports = function(socket){
 
         definicaoEvento("disconnect", function () {
             for (var ponteiroMesario in global.mesarios) {
-                console.log(ponteiroMesario);
+                this.console.log(ponteiroMesario);
                 var mesario = global.mesarios[ponteiroMesario];
                 if (mesario.socket === socket.id) {
                     delete global.mesarios[ponteiroMesario];
@@ -282,7 +282,7 @@ module.exports = function(socket){
     var falhaValidacaoUsuario = function (mensagemErro) {
 
         enviarCliente('falha-autenticacao', 'Ocorreu acesso indevido ao servidor!');
-        console.log(mensagemErro);
+        this.console.log(mensagemErro);
     };
 
     // Executa esta função em caso de sucesso na requisição realizada pelo usuario
