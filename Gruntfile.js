@@ -128,7 +128,14 @@ module.exports = function(grunt){
         },
         jslint: {
             servidorJs: ['testes/*.js','servidor/controles/*.js']
+        },
+        webdriver: {
+            prod: {
+                url: 'https://urna.herokuapp.com/',
+                tests: ['testesInteface/*.js']
+            }
         }
+
 //        watch: {
 //            options: {
 //                livereload: true
@@ -144,8 +151,9 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-webdriver');
 
-    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:mochaTest','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
+    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:mochaTest','webdriver:prod','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
     grunt.registerTask('pages', ['jade:compile']);
 
     grunt.registerTask('default',[]);
