@@ -142,6 +142,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-mocha-test');
 
     grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:mochaTest','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
