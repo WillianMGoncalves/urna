@@ -93,7 +93,7 @@ module.exports = function(socket){
 
             baseDados.every( function( elemento ){
                 if( 'login' in elemento && 'senha' in elemento && 'login' in dados && 'senha' in dados ){
-                    if( elemento.login == dados.login && elemento.senha == dados.senha ){
+                    if( elemento.login === dados.login && elemento.senha === dados.senha ){
                         usuarioValido = elemento;
                         return false;
                     }
@@ -129,7 +129,7 @@ module.exports = function(socket){
                     var socketUrna = global.usuariosOnline[ socketIdUrna ].socket;
                     var urna = global.urnas[ socketIdUrna ];
                     numeroUrnas++;
-                    if( urna.mesario == urnaAtual.mesario )
+                    if( urna.mesario === urnaAtual.mesario )
                     {
                         urnas.push( {
                             index: numeroUrnas,
@@ -138,7 +138,7 @@ module.exports = function(socket){
                             porta: socketUrna.handshake.address.port
                         });
                     }
-                    if( numeroUrnas == Object.keys(global.urnas).length ){
+                    if( numeroUrnas === Object.keys(global.urnas).length ){
                         enviarCliente( "disponibilizar-aplicacao", paginaUrna.toString() );
                         socketMesario.emit( "obter-todas-urnas", urnas );
                     }
@@ -221,7 +221,7 @@ module.exports = function(socket){
             for(var ponteiroMesario in global.mesarios){
                 console.log(ponteiroMesario);
                 var mesario = global.mesarios[ponteiroMesario];
-                if( mesario.socket == socket.id ){
+                if( mesario.socket === socket.id ){
                     delete global.mesarios[ponteiroMesario];
                     break;
                 }
