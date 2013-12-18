@@ -125,6 +125,9 @@ module.exports = function(grunt){
                 }
             },
             servidorJs: ['testes/*.js','servidor/controles/*.js']
+        },
+        jslint: {
+            servidorJs: ['testes/*.js','servidor/controles/*.js']
         }
 //        watch: {
 //            options: {
@@ -141,7 +144,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-test');
 
-    grunt.registerTask('deploy', ['jshint:servidorJs','mochaTest:mochaTest','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
+    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:mochaTest','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
     grunt.registerTask('pages', ['jade:compile']);
 
     grunt.registerTask('default',[]);
