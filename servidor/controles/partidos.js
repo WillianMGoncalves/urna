@@ -20,7 +20,7 @@ this.module.exports = function (socket) {
             crud.atualizar('partidos', partido, sucessoAtualizacao, falhaAtualizacao);
         },
 
-        obterTudo: function (partidos) {
+        obterTudo: function () {
 
             var sucessoObtencao = function (partidos) {
 
@@ -54,7 +54,7 @@ this.module.exports = function (socket) {
             var sucessoInsercao = function (partidos) {
 
                 this.console.log('Partido inserido com Sucesso!');
-                socket.emit( 'partidos-obter-tudo', partidos );
+                socket.emit('partidos-obter-tudo', partidos);
             }, falhaInsercao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na inserção de partido! Erro:');

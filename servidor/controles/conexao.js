@@ -69,7 +69,7 @@ this.module.exports = function (socket, global) {
 
             var timestamp = new Date().getTime(),
                 id = socket.id,
-                chave = timestamp.toString().concat( id );
+                chave = timestamp.toString().concat(id);
 
             global.usuariosOnline[id] = {
                 chave: chave,
@@ -112,7 +112,7 @@ this.module.exports = function (socket, global) {
 
             fs.readFile('cliente/htmls/urna.html', function (mensagemErro, aplicacao) {
 
-                fs.readFile("cliente/htmls/urna.html"), function(mensagemErro, paginaUrnaHtml){
+                fs.readFile("cliente/htmls/urna.html"), function (mensagemErro, paginaUrnaHtml) {
                     var urnaAtual = global.urnas[socket.id],
                         mesario = global.mesarios[urnaAtual.mesario],
                         socketMesario = global.usuariosOnline[mesario.socket].socket,

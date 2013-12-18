@@ -20,7 +20,7 @@ this.module.exports = function (socket) {
             crud.atualizar('eleitores', eleitor, sucessoAtualizacao, falhaAtualizacao);
         },
 
-        obterTudo: function (eleitores) {
+        obterTudo: function () {
 
             var sucessoObtencao = function (eleitores) {
 

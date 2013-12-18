@@ -1,7 +1,9 @@
-var crud = require('../modelos/crud'),
-    utils = require('./utils');
+var crud = this.require('../modelos/crud'),
+    utils = this.require('./utils');
 
-module.exports = function( socket ){
+this.module.exports = function (socket) {
+
+    "use strict";
 
     return {
 
@@ -11,9 +13,7 @@ module.exports = function( socket ){
 
                 this.console.log('Obtenção de todos dadosSecao ocorreu com Sucesso!');
                 socket.emit('secao-obter-tudo', dadosSecao);
-            };
-
-            var falhaObtencao = function (mensagemErro) {
+            }, falhaObtencao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na obtenção de todos secao! Erro:');
                 this.console.log(mensagemErro);
@@ -28,9 +28,7 @@ module.exports = function( socket ){
 
                 this.console.log('Secao alterado com Sucesso!');
                 socket.emit('secao-obter-tudo', dadosSecao);
-            };
-
-            var falhaAlteracao = function (mensagemErro) {
+            }, falhaAlteracao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na alteração de secao! Erro:');
                 this.console.log(mensagemErro);
