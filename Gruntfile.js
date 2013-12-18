@@ -115,8 +115,19 @@ module.exports = function(grunt){
             }
         },
         mochaSelenium: {
+            options: {
+                // Mocha options
+                reporter: 'spec',
+                timeout: 30e3,
+                // Toggles wd's promises API, default:false
+                usePromises: false
+            },
             interface: {
-                src: ['testesInterface/*.js']
+                src: ['testesInterface/*.js'],
+                options: {
+                    // Chrome browser must be installed from Chromedriver support
+                    browserName: 'chrome'
+                }
             }
         },
         jshint: {
