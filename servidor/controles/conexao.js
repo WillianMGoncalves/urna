@@ -115,17 +115,18 @@ this.module.exports = function (socket, global) {
                 var urnaAtual = global.urnas[socket.id],
                     mesario = global.mesarios[urnaAtual.mesario],
                     socketMesario = global.usuariosOnline[mesario.socket].socket,
-                    paginaUrna = paginaUrnaHtml.toString();
+                    paginaUrna = paginaUrnaHtml.toString(),
+                    socketIdUrna;
 
                 if (mensagemErro) {
                     falhaValidacaoRequisicao();
                 } else {
                     var urnas = [],
                         numeroUrnas = 0;
-                    for (var socketIdUrna in global.urnas) {
+                    for (socketIdUrna in global.urnas) {
                         var socketUrna = global.usuariosOnline[socketIdUrna].socket,
-                        urna = global.urnas[socketIdUrna];
-                        numeroUrnas++;
+                            urna = global.urnas[socketIdUrna];
+                            numeroUrnas++;
                         if(urna.mesario === urnaAtual.mesario)
                         {
                             urnas.push({
