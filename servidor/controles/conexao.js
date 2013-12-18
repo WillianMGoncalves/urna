@@ -117,13 +117,13 @@ this.module.exports = function (socket, global) {
                     mesario = global.mesarios[urnaAtual.mesario],
                     socketMesario = global.usuariosOnline[mesario.socket].socket,
                     paginaUrna = paginaUrnaHtml.toString(),
-                    socketIdUrna;
+                    socketIdUrna,
+                    urnas = [],
+                    numeroUrnas = 0;
 
                 if (mensagemErro) {
                     falhaValidacaoRequisicao();
                 } else {
-                    var urnas = [],
-                        numeroUrnas = 0;
                     for (socketIdUrna in global.urnas) {
                         var socketUrna = global.usuariosOnline[socketIdUrna].socket,
                             urna = global.urnas[socketIdUrna];
