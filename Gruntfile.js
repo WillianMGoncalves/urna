@@ -115,13 +115,6 @@ module.exports = function(grunt){
             }
         },
         mochaSelenium: {
-            options: {
-                // Mocha options
-                reporter: 'spec',
-                timeout: 30e3,
-                // Toggles wd's promises API, default:false
-                usePromises: false
-            },
             interface: {
                 src: ['testesInterface/*.js'],
                 options: {
