@@ -7,8 +7,7 @@ this.describe('Crud', function () {
 
     var funcaoFalhaCorreta = function (mensagemErro) {
         assert.ok('Mensagem de erro exibida adequadamente: ' + mensagemErro);
-    },
-    funcaoSucessoIncorreta = function (resposta) {
+    }, funcaoSucessoIncorreta = function (resposta) {
         throw 'Erro';
     };
 
@@ -21,27 +20,24 @@ this.describe('Crud', function () {
                 crud.obterTudo('administradores', null, funcaoFalhaCorreta);
             });
         });
-        it('Obter tudo permite funcaoFalha inválida', function () {
+        this.it('Obter tudo permite funcaoFalha inválida', function () {
             assert.throws(function () {
                 crud.obterTudo('administradores', funcaoSucessoIncorreta, null);
             });
         });
     });
 
-    describe('inserir', function () {
+    this.describe('inserir', function () {
         var novosDados = {
             campo1: 'valor1',
             campo2: 'valor2',
             campo3: 'valor3'
-        };
-
-        var funcaoFalha = function () {
+        }, funcaoFalha = function () {
             throw 'Erro';
-        };
-        var funcaoSucesso = function (dados) {
+        }, funcaoSucesso = function (dados) {
             assert.notEqual(dados.indexOf(dados), -1);
         };
-        it('Inserir adiciona parametros elementos', function () {
+        this.it('Inserir adiciona parametros elementos', function () {
             crud.inserir('teste', novosDados, funcaoSucesso, funcaoFalha);
         });
     });

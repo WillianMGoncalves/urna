@@ -1,7 +1,7 @@
-var crud = require('../modelos/crud');
-var utils = require('./utils');
+var crud = this.require('../modelos/crud');
+var utils = this.require('./utils');
 
-module.exports = function (socket, global) {
+this.module.exports = function (socket, global) {
     "use strict";
     return {
 
@@ -9,8 +9,7 @@ module.exports = function (socket, global) {
 
             var sucessoAtualizacao = function () {
                 this.console.log('Atualizacao do administrador realizada com Sucesso!');
-            },
-            falhaAtualizacao = function (mensagemErro) {
+            },  falhaAtualizacao = function (mensagemErro) {
                 this.console.log('Ocorreu uma falha na atualizacao de administrador! Erro:');
                 this.console.log(mensagemErro);
             };
@@ -21,12 +20,9 @@ module.exports = function (socket, global) {
         obterTudo: function (administradores) {
 
             var sucessoObtencao = function (administradores) {
-
                 this.console.log('Obtenção de todos administradores ocorreu com Sucesso!');
                 socket.emit('administradores-obter-tudo', administradores);
-            };
-
-            var falhaObtencao = function (mensagemErro) {
+            }, falhaObtencao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na obtenção de todos administrador! Erro:');
                 this.console.log(mensagemErro);
@@ -38,12 +34,8 @@ module.exports = function (socket, global) {
         obterPorId: function (id) {
 
             var sucessoObtencaoPorId = function () {
-
                 this.console.log('Obtenção de todos administradores ocorreu com Sucesso!');
-            };
-
-            var falhaObtencaoPorId = function (mensagemErro) {
-
+            }, falhaObtencaoPorId = function (mensagemErro) {
                 this.console.log('Ocorreu uma falha na otenção de administrador! Erro:');
                 this.console.log(mensagemErro);
             };
@@ -54,13 +46,9 @@ module.exports = function (socket, global) {
         inserir: function (administrador) {
 
             var sucessoInsercao = function (administradores) {
-
                 this.console.log('Administrador inserido com Sucesso!');
                 socket.emit('administradores-obter-tudo', administradores);
-            };
-
-            var falhaInsercao = function (mensagemErro) {
-
+            }, falhaInsercao = function (mensagemErro) {
                 this.console.log('Ocorreu uma falha na inserção de administrador! Erro:');
                 this.console.log(mensagemErro);
             };
@@ -71,13 +59,9 @@ module.exports = function (socket, global) {
         alterar: function (administrador) {
 
             var sucessoAlteracao = function (administradores) {
-
                 this.console.log('Administrador alterado com Sucesso!');
                 socket.emit('administradores-obter-tudo', administradores);
-            };
-
-            var falhaAlteracao = function (mensagemErro) {
-
+            }, falhaAlteracao = function (mensagemErro) {
                 this.console.log('Ocorreu uma falha na alteração de administrador! Erro:');
                 this.console.log(mensagemErro);
             };
@@ -88,13 +72,9 @@ module.exports = function (socket, global) {
         excluir: function (administrador) {
 
             var sucessoExclucao = function (administradores) {
-
                 this.console.log('Administrador excluido com Sucesso!');
                 socket.emit('administradores-obter-tudo', administradores);
-            };
-
-            var falhaExclusao = function (mensagemErro) {
-
+            }, falhaExclusao = function (mensagemErro) {
                 this.console.log('Ocorreu uma falha na exclusão de administrador! Erro:');
                 this.console.log(mensagemErro);
             };

@@ -11,9 +11,7 @@ module.exports = function (socket, global) {
             var sucessoAtualizacao = function () {
 
                 this.console.log('Atualizacao do coligacao realizada com Sucesso!');
-            };
-
-            var falhaAtualizacao = function (mensagemErro) {
+            }, falhaAtualizacao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na atualizacao de coligacao! Erro:');
                 this.console.log(mensagemErro);
@@ -28,9 +26,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Obtenção de todos coligacoes ocorreu com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
-            };
-
-            var falhaObtencao = function (mensagemErro) {
+            }, falhaObtencao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na obtenção de todos coligacao! Erro:');
                 this.console.log(mensagemErro);
@@ -44,9 +40,7 @@ module.exports = function (socket, global) {
             var sucessoObtencaoPorId = function () {
 
                 this.console.log('Obtenção de todos coligacoes ocorreu com Sucesso!');
-            };
-
-            var falhaObtencaoPorId = function (mensagemErro) {
+            }, falhaObtencaoPorId = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na otenção de coligacao! Erro:');
                 this.console.log(mensagemErro);
@@ -61,9 +55,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Coligacao inserido com Sucesso!');
                 socket.emit( 'coligacoes-obter-tudo', coligacoes );
-            };
-
-            var falhaInsercao = function (mensagemErro) {
+            }, falhaInsercao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na inserção de coligacao! Erro:');
                 this.console.log(mensagemErro);
@@ -78,9 +70,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Coligacao alterado com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
-            };
-
-            var falhaAlteracao = function (mensagemErro) {
+            }, falhaAlteracao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na alteração de coligacao! Erro:');
                 this.console.log(mensagemErro);
@@ -95,9 +85,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Coligacao excluido com Sucesso!');
                 socket.emit('coligacoes-obter-tudo', coligacoes);
-            };
-
-            var falhaExclusao = function (mensagemErro) {
+            }, falhaExclusao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na exclusão de coligacao! Erro:');
                 this.console.log(mensagemErro);

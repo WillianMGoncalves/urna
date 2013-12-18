@@ -1,5 +1,5 @@
-var crud = require('../modelos/crud');
-var utils = require('./utils');
+var crud = this.require('../modelos/crud');
+var utils = this.require('./utils');
 
 module.exports = function (socket, global) {
 
@@ -10,9 +10,7 @@ module.exports = function (socket, global) {
             var sucessoAtualizacao = function () {
 
                 this.console.log('Atualizacao do candidato realizada com Sucesso!');
-            };
-
-            var falhaAtualizacao = function (mensagemErro) {
+            }, falhaAtualizacao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na atualizacao de candidato! Erro:');
                 this.console.log(mensagemErro);
@@ -27,9 +25,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Obtenção de todos candidatos ocorreu com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
-            };
-
-            var falhaObtencao = function (mensagemErro) {
+            }, falhaObtencao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na obtenção de todos candidato! Erro:');
                 this.console.log(mensagemErro);
@@ -43,9 +39,7 @@ module.exports = function (socket, global) {
             var sucessoObtencaoPorId = function () {
 
                 this.console.log('Obtenção de todos candidatos ocorreu com Sucesso!');
-            };
-
-            var falhaObtencaoPorId = function (mensagemErro) {
+            }, falhaObtencaoPorId = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na otenção de candidato! Erro:');
                 this.console.log(mensagemErro);
@@ -60,9 +54,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Candidato inserido com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
-            };
-
-            var falhaInsercao = function (mensagemErro) {
+            }, falhaInsercao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na inserção de candidato! Erro:');
                 this.console.log(mensagemErro);
@@ -77,9 +69,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Candidato alterado com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
-            };
-
-            var falhaAlteracao = function (mensagemErro) {
+            }, falhaAlteracao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na alteração de candidato! Erro:');
                 this.console.log(mensagemErro);
@@ -94,9 +84,7 @@ module.exports = function (socket, global) {
 
                 this.console.log('Candidato excluido com Sucesso!');
                 socket.emit('candidatos-obter-tudo', candidatos);
-            };
-
-            var falhaExclusao = function (mensagemErro) {
+            }, falhaExclusao = function (mensagemErro) {
 
                 this.console.log('Ocorreu uma falha na exclusão de candidato! Erro:');
                 this.console.log(mensagemErro);
