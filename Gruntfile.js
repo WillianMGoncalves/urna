@@ -111,7 +111,7 @@ module.exports = function(grunt){
                 options: {
                     reporter: 'spec'
                 },
-                src: ['testes/*.js']
+                src: ['testes/*.js','testesInterface/*.js']
             }
         },
         mochaSelenium: {
@@ -162,7 +162,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-mocha-selenium');
 
-    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:servidorJs','mochaSelenium:interface','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
+    grunt.registerTask('deploy', ['jslint:servidorJs','mochaTest:servidorJs','concat:css','cssmin:css','concat:js','uglify:js','jade:compile']);
     grunt.registerTask('pages', ['jade:compile']);
 
     grunt.registerTask('default',[]);

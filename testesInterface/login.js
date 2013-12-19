@@ -1,19 +1,30 @@
-/*global describe, require, it*/
+/*global describe, require, it, before*/
 
-var assert = require('assert'),
-    test = require('selenium-webdriver/testing'),
-    webdriver = require('selenium-webdriver');
+var assert = require('assert')
+    , fs = require('fs')
+    , webdriver = require('selenium-webdriver')
+    , colors = require('colors');
 
-test.describe('Login', function() {
-    test.it('Entrada', function() {
-        var driver = new webdriver.Builder().build();
+var driver;
 
-        var login = driver.findElement(webdriver.By.id('formulario-autenticacao-login'));
-        login.sendKeys('webdriver');
-        login.getAttribute('value').then(function(value) {
-            assert.equal(value, 'webdriver');
-        });
+// tests
+describe('Login', function() {
+    it('Campos', function(done) {
 
-        driver.quit();
+        driver = new webdriver
+            .Builder()
+            .usingServer('http://urna.herokuapp.com')
+            .withCapabilities(
+            {
+                'browserName': 'chrome'
+            })
+            .build();
+        var searchBox = driver.findElement(webdriver.By.id('formulario-autenticacao-login'));
+        searchBox.sendKeys('webdriver\n').then(function() {
+            return searchBox.getAttribute('value');
+        }).then(function(value) {
+                assert.equal(value, 'webxdriver');
+                done();
+            });
     });
 });
