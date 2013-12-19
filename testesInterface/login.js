@@ -1,11 +1,8 @@
 /*global describe, require, it, before*/
 
-var assert = require('assert')
-    , fs = require('fs')
-    , webdriver = require('selenium-webdriver')
-    , colors = require('colors');
-
-var driver;
+var assert = require('assert'),
+    webdriver = require('selenium-webdriver'),
+    driver;
 
 // tests
 describe('Login', function() {
