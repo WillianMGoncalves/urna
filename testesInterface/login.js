@@ -7,6 +7,7 @@ var assert = require('assert'),
 describe('Login', function() {
     it('Campos', function(done) {
 
+        var valido = false;
         var webdriver = require('selenium-webdriver');
 
         var driver = new webdriver.Builder().
@@ -15,12 +16,19 @@ describe('Login', function() {
 
         driver.get('http://urna.herokuapp.com/');
 
-        var searchBox = driver.findElement(webdriver.By.id('formulario-autenticacao-login'));
-        searchBox.sendKeys('webdriver\n').then(function() {
-            return searchBox.getAttribute('value');
-        }).then(function (value) {
-                    assert.equal(value, 'webxdriver');
-                    done();
-                });
+        var login = driver.findElement(webdriver.By.id('formulario-autenticacao-login'));
+        var senha = driver.findElement(webdriver.By.id('formulario-autenticacao-senha'));
+
+        login.sendKeys('1').then(function () {
+            return login.getAttribute('value');
+        }).then(function (valorLogin) {
+                    senha.sendKeys('1').then(function () {
+                        return senha.getAttribute('value');
+                    }).then(function (valorSenha) {
+                                assert.equal(valorSenha, '1');
+                                done();
+                            });
+                })
+        driver.quit();
     });
 });
